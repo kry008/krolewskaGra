@@ -11,3 +11,45 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+* {
+  text-align: center;
+}
+
+div {
+  min-height: 20px;
+}
+
+.white {
+  background-color: aliceblue;
+}
+
+.black {
+  background-color: black;
+  color: aliceblue;
+}
+
+#board {
+  display: flex;
+  width: 400px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  border: 1px solid black;
+}
+
+.field {
+  float: left;
+  width: 50px;
+  height: 50px;
+}
+
+#page {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+#undoMove {
+  display: inline-block;
+}
