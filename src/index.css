@@ -25,7 +25,7 @@ div {
 }
 
 .black {
-  background-color: black;
+  background-color: gray;
   color: aliceblue;
 }
 
@@ -54,6 +54,7 @@ div {
 }
 
 img {
-  width: 49px;
-  height: 49px;
+  width: 46px;
+  height: 46px;
+  margin-top: 2px;
 }
