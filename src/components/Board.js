@@ -47,7 +47,7 @@ class Square extends React.Component {
 
     render() {
     return(
-        <div id="field00" onClick={clicked} className={'field ' + this.props.color}>
+        <div id="field00" onClick={this.clicked} className={'field ' + this.props.color}>
                 <img src={this.state.image} alt="" />
             </div>
     )
