@@ -9,6 +9,7 @@ class Square extends React.Component {
             player: "",
             image: "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
         };
+        this.clicked=this.clicked.bind(this);
     }
 
     componentDidMount() {
@@ -39,9 +40,14 @@ class Square extends React.Component {
         }
     }
 
+
+    clicked() {
+        this.props.clicked(this.props.row, this.props.col);
+    }
+
     render() {
     return(
-        <div id="field00" className={'field ' + this.props.color}>
+        <div id="field00" onClick={clicked} className={'field ' + this.props.color}>
                 <img src={this.state.image} alt="" />
             </div>
     )
@@ -51,6 +57,15 @@ class Square extends React.Component {
 
 export default class Board extends React.Component {
 
+    constructor() {
+        this.squareClicked = this.squareClicked.bind(this);
+    }
+
+
+    squareClicked(row, col) {
+        console.log(row + " " + col);
+    }
+
     render()
     {
         const board = [];
@@ -59,11 +74,11 @@ export default class Board extends React.Component {
             for (let j = 0; j < 8; j++) {
                 if((i%2 + j%2)%2 == 0)
                 {
-                    row.push(<Square color="white" col={j} row={i} />)
+                    row.push(<Square color="white" col={j} row={i} clicked={this.squareClicked} />)
                 }
                 else
                 {
-                    row.push(<Square color="black" col={j} row={i} />)
+                    row.push(<Square color="black" col={j} row={i} clicked={this.squareClicked} />)
                 }
                 
             }
