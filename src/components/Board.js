@@ -72,6 +72,7 @@ export default class Board extends React.Component {
 
     doMove() {
         console.log(this.state.firstClickRow + " " + this.state.firstClickCol + " " + this.state.firstClickPiece + " " + this.state.firstClickPlayer);
+        this.setState({firstClickCol: "", firstClickRow: "", firstClickPiece: "", firstClickPlayer: ""});
     }
 
     squareClicked(row, col, piece, player) {
