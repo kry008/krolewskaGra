@@ -57,7 +57,8 @@ class Square extends React.Component {
 
 export default class Board extends React.Component {
 
-    constructor() {
+    constructor(props) {
+        super(props);
         this.squareClicked = this.squareClicked.bind(this);
     }
 
