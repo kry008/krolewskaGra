@@ -42,7 +42,7 @@ class Square extends React.Component {
 
 
     clicked() {
-        this.props.clicked(this.props.row, this.props.col);
+        this.props.clicked(this.props.row, this.props.col, this.state.piece, this.state.player);
     }
 
     render() {
@@ -59,12 +59,25 @@ export default class Board extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            firstClickCol: "",
+            firstClickRow: "",
+            firstClickPiece: "",
+            firstClickPlayer: "",
+            whichPlayer: "1"
+        };
         this.squareClicked = this.squareClicked.bind(this);
+        this.doMove = this.doMove.bind(this);
     }
 
+    doMove() {
+        console.log(firstClickRow + " " + firstClickCol + " " + firstClickPiece + " " + firstClickPlayer);
+    }
 
-    squareClicked(row, col) {
-        console.log(row + " " + col);
+    squareClicked(row, col, piece, player) {
+        if(this.state.firstClickCol == "") {
+            this.setState({firstClickCol = col, firstClickRow = row, firstClickPiece = piece, firstClickPlayer = player});
+        } else this.doMove();
     }
 
     render()
