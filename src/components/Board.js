@@ -42,13 +42,14 @@ class Square extends React.Component {
 
 
     clicked() {
-        this.props.clicked(this.props.row, this.props.col, this.state.piece, this.state.player);
+        this.props.clicked(this.props.row, this.props.col, this.state.piece, this.state.player, this.props.key);
     }
 
     render() {
     return(
-        <div id="field00" onClick={this.clicked} className={'field ' + this.props.color}>
-                <img src={this.state.image} alt="" />
+        <div id="field00" onClick={this.clicked} className={'field ' + this.props.color} style={{ 
+            backgroundImage: `url("${this.state.image}")` 
+          }}>
             </div>
     )
 }
@@ -64,6 +65,7 @@ export default class Board extends React.Component {
             firstClickRow: "",
             firstClickPiece: "",
             firstClickPlayer: "",
+            firstClickKey: "",
             whichPlayer: "1"
         };
         this.squareClicked = this.squareClicked.bind(this);
@@ -76,32 +78,35 @@ export default class Board extends React.Component {
         if (col == this.state.firstClickCol && row == this.state.firstClickRow) {
             console.log("Od kliknięcie")
         }
+
         this.setState({firstClickCol: "", firstClickRow: "", firstClickPiece: "", firstClickPlayer: ""});
     }
 
-    squareClicked(row, col, piece, player) {
+    squareClicked(row, col, piece, player, key) {
         if(this.state.firstClickCol == "") {
             if(player == this.state.whichPlayer) {
-            this.setState({firstClickCol: col, firstClickRow: row, firstClickPiece: piece, firstClickPlayer: player});
+            this.setState({firstClickCol: col, firstClickRow: row, firstClickPiece: piece, firstClickPlayer: player, firstClickKey: key});
             } else console.log("nie ten gracz");
-        } else this.doMove(row, col, piece, player);
+        } else this.doMove(row, col, piece, player, key);
     }
 
     render()
     {
+        var key = 0;
         const board = [];
         for (let i = 0; i < 8; i++) {
             const row = [];
             for (let j = 0; j < 8; j++) {
                 if((i%2 + j%2)%2 == 0)
                 {
-                    row.push(<Square color="white" col={j} row={i} clicked={this.squareClicked} />)
+                    row.push(<Square color="white" col={j} row={i} key={key} clicked={this.squareClicked} />)
                 }
                 else
                 {
-                    row.push(<Square color="black" col={j} row={i} clicked={this.squareClicked} />)
+                    row.push(<Square color="black" col={j} row={i} key={key} clicked={this.squareClicked} />)
                 }
-                
+                key++
+                //console.log(key)
             }
             board.push(row)
             
