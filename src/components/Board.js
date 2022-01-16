@@ -113,12 +113,45 @@ export default class Board extends React.Component {
         }
         else if(this.state.firstClickPiece == "rook")
         {
+            //console.log(this.state)
+            //console.log("col" + col + " row" + row)
             if(this.state.firstClickPlayer == "1") {
+                if(col == this.state.firstClickCol || row == this.state.firstClickRow)
+                {
+                    //console.log("Yey!")
+                    let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
+                    let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
+                    newPiece[this.state.firstClickRow][this.state.firstClickCol] = "";
+                    newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
+                    newPiece[row][col] = "rook";
+                    newPlayer[row][col] = "1";
+                    this.setState({
+                        piece: newPiece,
+                        player: newPlayer,
+                        whichPlayer: "2",
+                        error: ""
+                    });
+                }
 
             }
             else
             {
-
+                if(col == this.state.firstClickCol || row == this.state.firstClickRow)
+                {
+                    //console.log("Yey!")
+                    let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
+                    let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
+                    newPiece[this.state.firstClickRow][this.state.firstClickCol] = "";
+                    newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
+                    newPiece[row][col] = "rook";
+                    newPlayer[row][col] = "2";
+                    this.setState({
+                        piece: newPiece,
+                        player: newPlayer,
+                        whichPlayer: "1",
+                        error: ""
+                    });
+                }
             }
         }
 
@@ -128,7 +161,7 @@ export default class Board extends React.Component {
     squareClicked(row, col) {
         if(this.state.firstClickCol == "") {
             if(this.state.player[row][col] == this.state.whichPlayer) {
-            this.setState({firstClickCol: col, firstClickRow: row, firstClickPiece: this.state.piece[row][col], firstClickPlayer: this.state.player[row][col]});
+                this.setState({firstClickCol: col, firstClickRow: row, firstClickPiece: this.state.piece[row][col], firstClickPlayer: this.state.player[row][col]});
             } 
             else 
             {
