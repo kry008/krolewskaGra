@@ -137,7 +137,11 @@ export default class Board extends React.Component {
             board.push(row)
         }
         return(
-            <div id="board">{board}</div>
+            <div>
+                <div id="board">{board}</div>
+                <div id="movePlayer">{this.state.whichPlayer == 1?"Ruch białych":"Ruch czarnych"}</div>
+                <div id="infoGame"></div>
+            </div>
         )
     }
     
