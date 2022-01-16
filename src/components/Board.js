@@ -234,11 +234,62 @@ export default class Board extends React.Component {
                         this.setState({error: ""}); 
                     }, 500);
                 }
-
-
             }
         }
+        else if(this.state.firstClickPiece == "queen")
+        {
+            if(this.state.firstClickPlayer == "1")
+            {
+                if(col == this.state.firstClickCol || row == this.state.firstClickRow)
+                {
+                    let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
+                    let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
+                    newPiece[this.state.firstClickRow][this.state.firstClickCol] = "";
+                    newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
+                    newPiece[row][col] = "queen";
+                    newPlayer[row][col] = "1";
+                    this.setState({
+                        piece: newPiece,
+                        player: newPlayer,
+                        whichPlayer: "2",
+                        error: ""
+                    });
+                }
+                else
+                {
+                    this.setState({error: "Wybierz poprawny ruch"})
+                    setTimeout(() => {
+                        this.setState({error: ""}); 
+                    }, 500);
+                }
 
+            }
+            else
+            {
+                if(col == this.state.firstClickCol || row == this.state.firstClickRow)
+                {
+                    let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
+                    let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
+                    newPiece[this.state.firstClickRow][this.state.firstClickCol] = "";
+                    newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
+                    newPiece[row][col] = "queen";
+                    newPlayer[row][col] = "2";
+                    this.setState({
+                        piece: newPiece,
+                        player: newPlayer,
+                        whichPlayer: "1",
+                        error: ""
+                    });
+                }
+                else
+                {
+                    this.setState({error: "Wybierz poprawny ruch"})
+                    setTimeout(() => {
+                        this.setState({error: ""}); 
+                    }, 500);
+                }
+            }
+        }
         this.setState({firstClickCol: "", firstClickRow: "", firstClickPiece: "", firstClickPlayer: ""});
     }
 
