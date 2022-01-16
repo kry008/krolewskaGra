@@ -77,19 +77,34 @@ export default class Board extends React.Component {
     doMove(row, col) {
         if (this.state.firstClickPiece == "pawn") {
             if(this.state.firstClickPlayer == "1") {
-                if((row == this.state.firstClickRow - 1 || (this.state.firstClickRow == 6 && row == this.state.firstClickRow - 2)) && this.state.piece[row][col] == "" && col == this.state.firstClickCol) {
+                if(((row == this.state.firstClickRow - 1 || (this.state.firstClickRow == 6 && row == this.state.firstClickRow - 2)) 
+                    && this.state.piece[row][col] == "" && col == this.state.firstClickCol) 
+                    || (row == this.state.firstClickRow - 1 && (col == (this.state.firstClickCol + 1) ||  col == (this.state.firstClickCol - 1)))) {
                     let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
                     let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
                     newPiece[this.state.firstClickRow][this.state.firstClickCol] = "";
                     newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
                     newPiece[row][col] = "pawn";
                     newPlayer[row][col] = "1";
-                    this.setState({
-                        piece: newPiece,
-                        player: newPlayer,
-                        whichPlayer: "2",
-                        error: ""
-                    });
+                    console.log("TUTAJ PATRZ1: " + row)
+                    if(row == "0")
+                    {
+                        this.setState({
+                            piece: "queen",
+                            player: newPlayer,
+                            whichPlayer: "2",
+                            error: ""
+                        });
+                    }
+                    else
+                    {
+                        this.setState({
+                            piece: newPiece,
+                            player: newPlayer,
+                            whichPlayer: "2",
+                            error: ""
+                        });
+                    }
                 }
                 else
                 {
@@ -99,7 +114,11 @@ export default class Board extends React.Component {
                     }, 650);
                 }
             } else {
-                if((row == this.state.firstClickRow + 1 || (this.state.firstClickRow == 1 && row == this.state.firstClickRow + 2)) && this.state.piece[row][col] == "" && col == this.state.firstClickCol) {
+                if(((row == this.state.firstClickRow + 1 
+                    || (this.state.firstClickRow == 1 
+                    && row == this.state.firstClickRow + 2)) 
+                    && this.state.piece[row][col] == "" 
+                    && col == this.state.firstClickCol) || (row == this.state.firstClickRow + 1 && (col == (this.state.firstClickCol + 1) ||  col == (this.state.firstClickCol - 1)))) {
 
                     let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
                     let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
@@ -107,12 +126,25 @@ export default class Board extends React.Component {
                     newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
                     newPiece[row][col] = "pawn";
                     newPlayer[row][col] = "2";
-                    this.setState({
-                        piece: newPiece,
-                        player: newPlayer,
-                        whichPlayer: "1",
-                        error: ""
-                    });
+                    console.log("TUTAJ PATRZ2: " + row)
+                    if(row == "7")
+                    {
+                        this.setState({
+                            piece: "queen",
+                            player: newPlayer,
+                            whichPlayer: "1",
+                            error: ""
+                        });
+                    }
+                    else
+                    {
+                        this.setState({
+                            piece: newPiece,
+                            player: newPlayer,
+                            whichPlayer: "1",
+                            error: ""
+                        });
+                    }
                 
                 }
                 else
