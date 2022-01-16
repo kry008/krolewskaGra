@@ -51,22 +51,23 @@ export default class Board extends React.Component {
             firstClickPiece: "",
             firstClickPlayer: "",
             whichPlayer: "1",
-            piece: [[["rook"], ["knight"], ["bishop"], ["queen"], ["king"], ["bishop"], ["knight"], ["rook"]],
-            [["pawn"], ["pawn"], ["pawn"], ["pawn"], ["pawn"], ["pawn"], ["pawn"], ["pawn"]],
-            [[""], [""], [""], [""], [""], [""], [""], [""]],
-            [[""], [""], [""], [""], [""], [""], [""], [""]],
-            [[""], [""], [""], [""], [""], [""], [""], [""]],
-            [[""], [""], [""], [""], [""], [""], [""], [""]],
-            [["pawn"], ["pawn"], ["pawn"], ["pawn"], ["pawn"], ["pawn"], ["pawn"], ["pawn"]],
-            [["rook"], ["knight"], ["bishop"], ["queen"], ["king"], ["bishop"], ["knight"], ["rook"]]],
-            player: [[["2"], ["2"], ["2"], ["2"], ["2"], ["2"], ["2"], ["2"]],
-            [["2"], ["2"], ["2"], ["2"], ["2"], ["2"], ["2"], ["2"]],
-            [[""], [""], [""], [""], [""], [""], [""], [""]],
-            [[""], [""], [""], [""], [""], [""], [""], [""]],
-            [[""], [""], [""], [""], [""], [""], [""], [""]],
-            [[""], [""], [""], [""], [""], [""], [""], [""]],
-            [["1"], ["1"], ["1"], ["1"], ["1"], ["1"], ["1"], ["1"]],
-            [["1"], ["1"], ["1"], ["1"], ["1"], ["1"], ["1"], ["1"]]]
+            piece: [["rook", "knight", "bishop", "queen", "king", "bishop", "knight", "rook"],
+            ["pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn"],
+            ["", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", ""],
+            ["pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn"],
+            ["rook", "knight", "bishop", "queen", "king", "bishop", "knight", "rook"]],
+            player: [["2", "2", "2", "2", "2", "2", "2", "2"],
+            ["2", "2", "2", "2", "2", "2", "2", "2"],
+            ["", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", ""],
+            ["1", "1", "1", "1", "1", "1", "1", "1"],
+            ["1", "1", "1", "1", "1", "1", "1", "1"]],
+            error: ""
         };
         this.squareClicked = this.squareClicked.bind(this);
         this.doMove = this.doMove.bind(this);
@@ -86,11 +87,13 @@ export default class Board extends React.Component {
                     this.setState({
                         piece: newPiece,
                         player: newPlayer,
-                        whichPlayer: "2"
+                        whichPlayer: "2",
+                        error: ""
                     });
                 }
             } else {
                 if((row == this.state.firstClickRow + 1 || (this.state.firstClickRow == 1 && row == this.state.firstClickRow + 2)) && this.state.piece[row][col] == "" && col == this.state.firstClickCol) {
+
                     let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
                     let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
                     newPiece[this.state.firstClickRow][this.state.firstClickCol] = "";
@@ -100,9 +103,22 @@ export default class Board extends React.Component {
                     this.setState({
                         piece: newPiece,
                         player: newPlayer,
-                        whichPlayer: "1"
+                        whichPlayer: "1",
+                        error: ""
                     });
+                
                 }
+            
+            }
+        }
+        else if(this.state.firstClickPiece == "rook")
+        {
+            if(this.state.firstClickPlayer == "1") {
+
+            }
+            else
+            {
+
             }
         }
 
@@ -113,7 +129,14 @@ export default class Board extends React.Component {
         if(this.state.firstClickCol == "") {
             if(this.state.player[row][col] == this.state.whichPlayer) {
             this.setState({firstClickCol: col, firstClickRow: row, firstClickPiece: this.state.piece[row][col], firstClickPlayer: this.state.player[row][col]});
-            } else console.log("nie ten gracz");
+            } 
+            else 
+            {
+                this.setState({error: "Nie ten gracz"});
+                setTimeout(() => {
+                    this.setState({error: ""}); 
+                }, 500);
+            }
         } else this.doMove(row, col);
     }
 
@@ -140,7 +163,7 @@ export default class Board extends React.Component {
             <div>
                 <div id="board">{board}</div>
                 <div id="movePlayer">{this.state.whichPlayer == 1?"Ruch białych":"Ruch czarnych"}</div>
-                <div id="infoGame"></div>
+                <div id="infoGame"><p style={{color: "red"}}>{this.state.error}</p></div>
             </div>
         )
     }
