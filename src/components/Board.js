@@ -89,22 +89,14 @@ export default class Board extends React.Component {
                     console.log("TUTAJ PATRZ1: " + row)
                     if(row == "0")
                     {
-                        this.setState({
-                            piece: "queen",
-                            player: newPlayer,
-                            whichPlayer: "2",
-                            error: ""
-                        });
+                        newPiece[row][col] = "queen";
                     }
-                    else
-                    {
-                        this.setState({
-                            piece: newPiece,
-                            player: newPlayer,
-                            whichPlayer: "2",
-                            error: ""
-                        });
-                    }
+                    this.setState({
+                        piece: newPiece,
+                        player: newPlayer,
+                        whichPlayer: "2",
+                        error: ""
+                    });
                 }
                 else
                 {
@@ -129,22 +121,15 @@ export default class Board extends React.Component {
                     console.log("TUTAJ PATRZ2: " + row)
                     if(row == "7")
                     {
-                        this.setState({
-                            piece: "queen",
-                            player: newPlayer,
-                            whichPlayer: "1",
-                            error: ""
-                        });
+                        newPiece[row][col] = "queen";
                     }
-                    else
-                    {
-                        this.setState({
-                            piece: newPiece,
-                            player: newPlayer,
-                            whichPlayer: "1",
-                            error: ""
-                        });
-                    }
+                    this.setState({
+                        piece: newPiece,
+                        player: newPlayer,
+                        whichPlayer: "1",
+                        error: ""
+                    });
+                    
                 
                 }
                 else
