@@ -96,7 +96,7 @@ export default class Board extends React.Component {
                     this.setState({error: "Wybierz poprawny ruch"})
                     setTimeout(() => {
                         this.setState({error: ""}); 
-                    }, 500);
+                    }, 650);
                 }
             } else {
                 if((row == this.state.firstClickRow + 1 || (this.state.firstClickRow == 1 && row == this.state.firstClickRow + 2)) && this.state.piece[row][col] == "" && col == this.state.firstClickCol) {
@@ -120,7 +120,7 @@ export default class Board extends React.Component {
                     this.setState({error: "Wybierz poprawny ruch"})
                     setTimeout(() => {
                         this.setState({error: ""}); 
-                    }, 500);
+                    }, 650);
                 }
             
             }
@@ -151,7 +151,7 @@ export default class Board extends React.Component {
                     this.setState({error: "Wybierz poprawny ruch"})
                     setTimeout(() => {
                         this.setState({error: ""}); 
-                    }, 500);
+                    }, 650);
                 }
 
             }
@@ -178,7 +178,7 @@ export default class Board extends React.Component {
                     this.setState({error: "Wybierz poprawny ruch"})
                     setTimeout(() => {
                         this.setState({error: ""}); 
-                    }, 500);
+                    }, 650);
                 }
             }
         }
@@ -206,7 +206,7 @@ export default class Board extends React.Component {
                     this.setState({error: "Wybierz poprawny ruch"})
                     setTimeout(() => {
                         this.setState({error: ""}); 
-                    }, 500);
+                    }, 650);
                 }
 
             }
@@ -232,7 +232,7 @@ export default class Board extends React.Component {
                     this.setState({error: "Wybierz poprawny ruch"})
                     setTimeout(() => {
                         this.setState({error: ""}); 
-                    }, 500);
+                    }, 650);
                 }
             }
         }
@@ -276,7 +276,7 @@ export default class Board extends React.Component {
                     this.setState({error: "Wybierz poprawny ruch"})
                     setTimeout(() => {
                         this.setState({error: ""}); 
-                    }, 500);
+                    }, 650);
                 }
 
             }
@@ -318,7 +318,91 @@ export default class Board extends React.Component {
                     this.setState({error: "Wybierz poprawny ruch"})
                     setTimeout(() => {
                         this.setState({error: ""}); 
-                    }, 500);
+                    }, 650);
+                }
+            }
+        }
+        else if(this.state.firstClickPiece == "bishop")
+        {
+            if(this.state.firstClickPlayer == "1")
+            {
+                if((row == (this.state.firstClickRow + 1) && col == (this.state.firstClickCol + 1)) || (row == (this.state.firstClickRow - 1) && col == (this.state.firstClickCol - 1))
+                    || (row == (this.state.firstClickRow + 2) && col == (this.state.firstClickCol + 2)) || (row == (this.state.firstClickRow - 2) && col == (this.state.firstClickCol - 2))
+                    || (row == (this.state.firstClickRow + 3) && col == (this.state.firstClickCol + 3)) || (row == (this.state.firstClickRow - 3) && col == (this.state.firstClickCol - 3))
+                    || (row == (this.state.firstClickRow + 4) && col == (this.state.firstClickCol + 4)) || (row == (this.state.firstClickRow - 4) && col == (this.state.firstClickCol - 4))
+                    || (row == (this.state.firstClickRow + 5) && col == (this.state.firstClickCol + 5)) || (row == (this.state.firstClickRow - 5) && col == (this.state.firstClickCol - 5))
+                    || (row == (this.state.firstClickRow + 6) && col == (this.state.firstClickCol + 6)) || (row == (this.state.firstClickRow - 6) && col == (this.state.firstClickCol - 6))
+                    || (row == (this.state.firstClickRow + 7) && col == (this.state.firstClickCol + 7)) || (row == (this.state.firstClickRow - 7) && col == (this.state.firstClickCol - 7))
+                    || (row == (this.state.firstClickRow + 8) && col == (this.state.firstClickCol + 8)) || (row == (this.state.firstClickRow - 8) && col == (this.state.firstClickCol - 8))
+                    || (row == (this.state.firstClickRow + 1) && col == (this.state.firstClickCol - 1)) || (row == (this.state.firstClickRow - 1) && col == (this.state.firstClickCol + 1))
+                    || (row == (this.state.firstClickRow + 2) && col == (this.state.firstClickCol - 2)) || (row == (this.state.firstClickRow - 2) && col == (this.state.firstClickCol + 2))
+                    || (row == (this.state.firstClickRow + 3) && col == (this.state.firstClickCol - 3)) || (row == (this.state.firstClickRow - 3) && col == (this.state.firstClickCol + 3))
+                    || (row == (this.state.firstClickRow + 4) && col == (this.state.firstClickCol - 4)) || (row == (this.state.firstClickRow - 4) && col == (this.state.firstClickCol + 4))
+                    || (row == (this.state.firstClickRow + 5) && col == (this.state.firstClickCol - 5)) || (row == (this.state.firstClickRow - 5) && col == (this.state.firstClickCol + 5))
+                    || (row == (this.state.firstClickRow + 6) && col == (this.state.firstClickCol - 6)) || (row == (this.state.firstClickRow - 6) && col == (this.state.firstClickCol + 6))
+                    || (row == (this.state.firstClickRow + 7) && col == (this.state.firstClickCol - 7)) || (row == (this.state.firstClickRow - 7) && col == (this.state.firstClickCol + 7))
+                    || (row == (this.state.firstClickRow + 8) && col == (this.state.firstClickCol - 8)) || (row == (this.state.firstClickRow - 8) && col == (this.state.firstClickCol + 8)))
+                {
+                    let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
+                    let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
+                    newPiece[this.state.firstClickRow][this.state.firstClickCol] = "";
+                    newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
+                    newPiece[row][col] = "bishop";
+                    newPlayer[row][col] = "1";
+                    this.setState({
+                        piece: newPiece,
+                        player: newPlayer,
+                        whichPlayer: "2",
+                        error: ""
+                    });
+                }
+                else
+                {
+                    this.setState({error: "Wybierz poprawny ruch"})
+                    setTimeout(() => {
+                        this.setState({error: ""}); 
+                    }, 650);
+                }
+
+            }
+            else
+            {
+                if((row == (this.state.firstClickRow + 1) && col == (this.state.firstClickCol + 1)) || (row == (this.state.firstClickRow - 1) && col == (this.state.firstClickCol - 1))
+                    || (row == (this.state.firstClickRow + 2) && col == (this.state.firstClickCol + 2)) || (row == (this.state.firstClickRow - 2) && col == (this.state.firstClickCol - 2))
+                    || (row == (this.state.firstClickRow + 3) && col == (this.state.firstClickCol + 3)) || (row == (this.state.firstClickRow - 3) && col == (this.state.firstClickCol - 3))
+                    || (row == (this.state.firstClickRow + 4) && col == (this.state.firstClickCol + 4)) || (row == (this.state.firstClickRow - 4) && col == (this.state.firstClickCol - 4))
+                    || (row == (this.state.firstClickRow + 5) && col == (this.state.firstClickCol + 5)) || (row == (this.state.firstClickRow - 5) && col == (this.state.firstClickCol - 5))
+                    || (row == (this.state.firstClickRow + 6) && col == (this.state.firstClickCol + 6)) || (row == (this.state.firstClickRow - 6) && col == (this.state.firstClickCol - 6))
+                    || (row == (this.state.firstClickRow + 7) && col == (this.state.firstClickCol + 7)) || (row == (this.state.firstClickRow - 7) && col == (this.state.firstClickCol - 7))
+                    || (row == (this.state.firstClickRow + 8) && col == (this.state.firstClickCol + 8)) || (row == (this.state.firstClickRow - 8) && col == (this.state.firstClickCol - 8))
+                    || (row == (this.state.firstClickRow + 1) && col == (this.state.firstClickCol - 1)) || (row == (this.state.firstClickRow - 1) && col == (this.state.firstClickCol + 1))
+                    || (row == (this.state.firstClickRow + 2) && col == (this.state.firstClickCol - 2)) || (row == (this.state.firstClickRow - 2) && col == (this.state.firstClickCol + 2))
+                    || (row == (this.state.firstClickRow + 3) && col == (this.state.firstClickCol - 3)) || (row == (this.state.firstClickRow - 3) && col == (this.state.firstClickCol + 3))
+                    || (row == (this.state.firstClickRow + 4) && col == (this.state.firstClickCol - 4)) || (row == (this.state.firstClickRow - 4) && col == (this.state.firstClickCol + 4))
+                    || (row == (this.state.firstClickRow + 5) && col == (this.state.firstClickCol - 5)) || (row == (this.state.firstClickRow - 5) && col == (this.state.firstClickCol + 5))
+                    || (row == (this.state.firstClickRow + 6) && col == (this.state.firstClickCol - 6)) || (row == (this.state.firstClickRow - 6) && col == (this.state.firstClickCol + 6))
+                    || (row == (this.state.firstClickRow + 7) && col == (this.state.firstClickCol - 7)) || (row == (this.state.firstClickRow - 7) && col == (this.state.firstClickCol + 7))
+                    || (row == (this.state.firstClickRow + 8) && col == (this.state.firstClickCol - 8)) || (row == (this.state.firstClickRow - 8) && col == (this.state.firstClickCol + 8)))
+                {
+                    let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
+                    let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
+                    newPiece[this.state.firstClickRow][this.state.firstClickCol] = "";
+                    newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
+                    newPiece[row][col] = "bishop";
+                    newPlayer[row][col] = "2";
+                    this.setState({
+                        piece: newPiece,
+                        player: newPlayer,
+                        whichPlayer: "1",
+                        error: ""
+                    });
+                }
+                else
+                {
+                    this.setState({error: "Wybierz poprawny ruch"})
+                    setTimeout(() => {
+                        this.setState({error: ""}); 
+                    }, 650);
                 }
             }
         }
@@ -335,7 +419,7 @@ export default class Board extends React.Component {
                 this.setState({error: "Nie ten gracz"});
                 setTimeout(() => {
                     this.setState({error: ""}); 
-                }, 500);
+                }, 650);
             }
         } else this.doMove(row, col);
     }
