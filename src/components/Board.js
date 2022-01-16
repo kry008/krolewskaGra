@@ -91,6 +91,13 @@ export default class Board extends React.Component {
                         error: ""
                     });
                 }
+                else
+                {
+                    this.setState({error: "Wybierz poprawny ruch"})
+                    setTimeout(() => {
+                        this.setState({error: ""}); 
+                    }, 500);
+                }
             } else {
                 if((row == this.state.firstClickRow + 1 || (this.state.firstClickRow == 1 && row == this.state.firstClickRow + 2)) && this.state.piece[row][col] == "" && col == this.state.firstClickCol) {
 
@@ -107,6 +114,13 @@ export default class Board extends React.Component {
                         error: ""
                     });
                 
+                }
+                else
+                {
+                    this.setState({error: "Wybierz poprawny ruch"})
+                    setTimeout(() => {
+                        this.setState({error: ""}); 
+                    }, 500);
                 }
             
             }
@@ -132,6 +146,13 @@ export default class Board extends React.Component {
                         error: ""
                     });
                 }
+                else
+                {
+                    this.setState({error: "Wybierz poprawny ruch"})
+                    setTimeout(() => {
+                        this.setState({error: ""}); 
+                    }, 500);
+                }
 
             }
             else
@@ -152,6 +173,24 @@ export default class Board extends React.Component {
                         error: ""
                     });
                 }
+                else
+                {
+                    this.setState({error: "Wybierz poprawny ruch"})
+                    setTimeout(() => {
+                        this.setState({error: ""}); 
+                    }, 500);
+                }
+            }
+        }
+        else if(this.state.firstClickPiece == "king")
+        {
+            if(this.state.firstClickPlayer == "1")
+            {
+
+            }
+            else
+            {
+
             }
         }
 
