@@ -209,19 +209,51 @@ export default class Board extends React.Component {
             {
                 if((col == this.state.firstClickCol || row == this.state.firstClickRow) && this.state.player[row][col]!="2")
                 {
-                    //console.log("Yey!")
-                    let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
-                    let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
-                    newPiece[this.state.firstClickRow][this.state.firstClickCol] = "";
-                    newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
-                    newPiece[row][col] = "rook";
-                    newPlayer[row][col] = "2";
-                    this.setState({
-                        piece: newPiece,
-                        player: newPlayer,
-                        whichPlayer: "1",
-                        error: ""
-                    });
+                    let kierunek;
+                    if(this.state.firstClickCol != col) kierunek = 1;
+                    else kierunek = 2;
+                    console.log(kierunek);
+                    let czyPustePola = true;
+                    if(kierunek==1) {
+                        let kierunek2;
+                        if(col-this.state.firstClickCol > 0) kierunek2 = -1;
+                        else kierunek2 = 1;
+                        for(let i=col+kierunek2; i!=this.state.firstClickCol; i+=kierunek2) {
+                            if(this.state.piece[row][i]!="")
+                            { 
+                                czyPustePola = false;
+                                console.log(czyPustePola)
+                                //break;
+                            }
+                        }
+                    } else {
+                        let kierunek2;
+                        if(row-this.state.firstClickRow > 0) kierunek2 = -1;
+                        else kierunek2 = 1;
+                        for(let i=row+kierunek2; i!=this.state.firstClickRow; i+=kierunek2) {
+                            if(this.state.piece[i][col]!="")
+                            { 
+                                czyPustePola = false;
+                                console.log(czyPustePola)
+                                //break;
+                            }
+                        }
+                    }
+                    if(czyPustePola && this.state.player[row][col]!="2") {
+                        //console.log("Yey!")
+                        let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
+                        let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
+                        newPiece[this.state.firstClickRow][this.state.firstClickCol] = "";
+                        newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
+                        newPiece[row][col] = "rook";
+                        newPlayer[row][col] = "2";
+                        this.setState({
+                            piece: newPiece,
+                            player: newPlayer,
+                            whichPlayer: "1",
+                            error: ""
+                        });
+                    }
                 }
                 else
                 {
@@ -309,7 +341,7 @@ export default class Board extends React.Component {
                     || (row == (this.state.firstClickRow + 8) && col == (this.state.firstClickCol - 8)) || (row == (this.state.firstClickRow - 8) && col == (this.state.firstClickCol + 8)))  && this.state.player[row][col]!="1")
                 {
                     let czyPustePola = true;
-                    if(row == this.firstClickRow || col == this.firstClickCol) {
+                    if(row == this.state.firstClickRow || col == this.state.firstClickCol) {
                         let kierunek;
                         if(this.state.firstClickCol != col) kierunek = 1;
                         else kierunek = 2;
@@ -334,21 +366,21 @@ export default class Board extends React.Component {
                                 if(this.state.piece[i][col]!="")
                                 { 
                                     czyPustePola = false;
-                                    console.log(czyPustePola)
+                                    console.log(czyPustePola);
                                     //break;
                                 }
                             }
                         }
                     } else {
-                    let kierunek;
-                    if(this.state.firstClickRow > row) kierunek = 1;
-                    else kierunek = -1;
-                    let kierunek2;
-                    if(this.state.firstClickCol > col) kierunek2 = 1;
-                    else kierunek2 = -1;
-                    let i,j;
-                    for(i = row+kierunek, j = col+kierunek2; i!= this.state.firstClickRow; i+=kierunek, j+=kierunek2) {
-                        if(this.state.piece[i][j]!="") czyPustePola=false;
+                        let kierunek;
+                        if(this.state.firstClickRow > row) kierunek = 1;
+                        else kierunek = -1;
+                        let kierunek2;
+                        if(this.state.firstClickCol > col) kierunek2 = 1;
+                        else kierunek2 = -1;
+                        let i,j;
+                        for(i = row+kierunek, j = col+kierunek2; i!= this.state.firstClickRow; i+=kierunek, j+=kierunek2) {
+                            if(this.state.piece[i][j]!="") czyPustePola=false;
                     }
                 }
                     if(czyPustePola && this.state.player[row][col]!="1") {
@@ -395,18 +427,63 @@ export default class Board extends React.Component {
                     || (row == (this.state.firstClickRow + 7) && col == (this.state.firstClickCol - 7)) || (row == (this.state.firstClickRow - 7) && col == (this.state.firstClickCol + 7))
                     || (row == (this.state.firstClickRow + 8) && col == (this.state.firstClickCol - 8)) || (row == (this.state.firstClickRow - 8) && col == (this.state.firstClickCol + 8)))  && this.state.player[row][col]!="2")
                 {
-                    let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
-                    let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
-                    newPiece[this.state.firstClickRow][this.state.firstClickCol] = "";
-                    newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
-                    newPiece[row][col] = "queen";
-                    newPlayer[row][col] = "2";
-                    this.setState({
-                        piece: newPiece,
-                        player: newPlayer,
-                        whichPlayer: "1",
-                        error: ""
-                    });
+                    let czyPustePola = true;
+                    if(row == this.state.firstClickRow || col == this.state.firstClickCol) {
+                        let kierunek;
+                        if(this.state.firstClickCol != col) kierunek = 1;
+                        else kierunek = 2;
+                        console.log(kierunek);
+                        if(kierunek==1) {
+                            let kierunek2;
+                            if(col-this.state.firstClickCol > 0) kierunek2 = -1;
+                            else kierunek2 = 1;
+                            for(let i=col+kierunek2; i!=this.state.firstClickCol; i+=kierunek2) {
+                                if(this.state.piece[row][i]!="")
+                                { 
+                                    czyPustePola = false;
+                                    console.log(czyPustePola)
+                                    //break;
+                                }
+                            }
+                        } else {
+                            let kierunek2;
+                            if(row-this.state.firstClickRow > 0) kierunek2 = -1;
+                            else kierunek2 = 1;
+                            for(let i=row+kierunek2; i!=this.state.firstClickRow; i+=kierunek2) {
+                                if(this.state.piece[i][col]!="")
+                                { 
+                                    czyPustePola = false;
+                                    console.log(czyPustePola);
+                                    //break;
+                                }
+                            }
+                        }
+                    } else {
+                        let kierunek;
+                        if(this.state.firstClickRow > row) kierunek = 1;
+                        else kierunek = -1;
+                        let kierunek2;
+                        if(this.state.firstClickCol > col) kierunek2 = 1;
+                        else kierunek2 = -1;
+                        let i,j;
+                        for(i = row+kierunek, j = col+kierunek2; i!= this.state.firstClickRow; i+=kierunek, j+=kierunek2) {
+                            if(this.state.piece[i][j]!="") czyPustePola=false;
+                    }
+                }
+                        if(czyPustePola && this.state.player[row][col]!="2") {
+                        let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
+                        let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
+                        newPiece[this.state.firstClickRow][this.state.firstClickCol] = "";
+                        newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
+                        newPiece[row][col] = "queen";
+                        newPlayer[row][col] = "2";
+                        this.setState({
+                            piece: newPiece,
+                            player: newPlayer,
+                            whichPlayer: "1",
+                            error: ""
+                        });
+                    }
                 }
                 else
                 {
@@ -492,18 +569,31 @@ export default class Board extends React.Component {
                     || (row == (this.state.firstClickRow + 7) && col == (this.state.firstClickCol - 7)) || (row == (this.state.firstClickRow - 7) && col == (this.state.firstClickCol + 7))
                     || (row == (this.state.firstClickRow + 8) && col == (this.state.firstClickCol - 8)) || (row == (this.state.firstClickRow - 8) && col == (this.state.firstClickCol + 8)))  && this.state.player[row][col]!="2")
                 {
-                    let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
-                    let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
-                    newPiece[this.state.firstClickRow][this.state.firstClickCol] = "";
-                    newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
-                    newPiece[row][col] = "bishop";
-                    newPlayer[row][col] = "2";
-                    this.setState({
-                        piece: newPiece,
-                        player: newPlayer,
-                        whichPlayer: "1",
-                        error: ""
-                    });
+                    let czyPustePola = true;
+                    let kierunek;
+                    if(this.state.firstClickRow > row) kierunek = 1;
+                    else kierunek = -1;
+                    let kierunek2;
+                    if(this.state.firstClickCol > col) kierunek2 = 1;
+                    else kierunek2 = -1;
+                    let i,j;
+                    for(i = row+kierunek, j = col+kierunek2; i!= this.state.firstClickRow; i+=kierunek, j+=kierunek2) {
+                        if(this.state.piece[i][j]!="") czyPustePola=false;
+                    }
+                    if(czyPustePola && this.state.player[row][col]!="2") {
+                        let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
+                        let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
+                        newPiece[this.state.firstClickRow][this.state.firstClickCol] = "";
+                        newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
+                        newPiece[row][col] = "bishop";
+                        newPlayer[row][col] = "2";
+                        this.setState({
+                            piece: newPiece,
+                            player: newPlayer,
+                            whichPlayer: "1",
+                            error: ""
+                        });
+                    }
                 }
                 else
                 {
