@@ -510,11 +510,11 @@ export default class Board extends React.Component {
             for (let j = 0; j < 8; j++) {
                 if((i%2 + j%2)%2 == 0)
                 {
-                    row.push(<Square color="white" col={j} row={i} piece={this.state.piece[i][j]} player={this.state.player[i][j]} key={key + this.state.piece[i][j]} clicked={this.squareClicked} />)
+                    row.push(<Square color="white" col={j} row={i} piece={this.state.piece[i][j]} player={this.state.player[i][j]} key={key + this.state.piece[i][j] + this.state.player[i][j]} clicked={this.squareClicked} />)
                 }
                 else
                 {
-                    row.push(<Square color="black" col={j} row={i} piece={this.state.piece[i][j]} player={this.state.player[i][j]} key={key + this.state.piece[i][j]} clicked={this.squareClicked} />)
+                    row.push(<Square color="black" col={j} row={i} piece={this.state.piece[i][j]} player={this.state.player[i][j]} key={key + this.state.piece[i][j] + this.state.player[i][j]} clicked={this.squareClicked} />)
                 }
                 key++;
             }
