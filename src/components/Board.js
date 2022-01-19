@@ -401,10 +401,10 @@ export default class Board extends React.Component {
                     if(this.state.firstClickCol > col) kierunek2 = 1;
                     else kierunek2 = -1;
                     let i,j;
-                    for(i = row, j = col; i!= this.state.firstClickCol; i+=kierunek, j+=kierunek2) {
-                        if(this.state.piece[i][j]=="") czyPustePola=false;
+                    for(i = row+kierunek, j = col+kierunek2; i!= this.state.firstClickRow; i+=kierunek, j+=kierunek2) {
+                        if(this.state.piece[i][j]!="") czyPustePola=false;
                     }
-                    if(czyPustePola) {
+                    if(czyPustePola && this.state.player[row][col]!="1") {
                         let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
                         let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
                         newPiece[this.state.firstClickRow][this.state.firstClickCol] = "";
