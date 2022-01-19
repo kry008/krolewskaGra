@@ -151,12 +151,18 @@ export default class Board extends React.Component {
                 if((col == this.state.firstClickCol || row == this.state.firstClickRow) && this.state.player[row][col]!="1")
                 {
                     let kierunek;
-                    if(this.statefirstClickCol== col) kierunek = 1;
+                    if(this.statefirstClickCol != col) kierunek = 1;
                     else kierunek = 2;
+                    console.log(kierunek);
                     let czyPustePola = true;
                     if(kierunek==1) {
                         for(let i=col; i>this.state.firstClickCol; i--) {
-                            if(this.state.piece[row][i]!="") czyPustePola = false;
+                            if(this.state.piece[row][i]!="")
+                            { 
+                                czyPustePola = false;
+                                console.log(czyPustePola)
+                                //break;
+                            }
                         }
                     }
                     if(czyPustePola) {
