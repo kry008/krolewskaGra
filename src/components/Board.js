@@ -309,22 +309,11 @@ export default class Board extends React.Component {
                     || (row == (this.state.firstClickRow + 8) && col == (this.state.firstClickCol - 8)) || (row == (this.state.firstClickRow - 8) && col == (this.state.firstClickCol + 8)))  && this.state.player[row][col]!="1")
                 {
                     let czyPustePola = true;
-                    let kierunek;
-                    if(this.state.firstClickRow > row) kierunek = 1;
-                    else kierunek = -1;
-                    let kierunek2;
-                    if(this.state.firstClickCol > col) kierunek2 = 1;
-                    else kierunek2 = -1;
-                    let i,j;
-                    for(i = row+kierunek, j = col+kierunek2; i!= this.state.firstClickRow; i+=kierunek, j+=kierunek2) {
-                        if(this.state.piece[i][j]!="") czyPustePola=false;
-                    }
                     if(row == this.firstClickRow || col == this.firstClickCol) {
                         let kierunek;
                         if(this.state.firstClickCol != col) kierunek = 1;
                         else kierunek = 2;
                         console.log(kierunek);
-                        let czyPustePola = true;
                         if(kierunek==1) {
                             let kierunek2;
                             if(col-this.state.firstClickCol > 0) kierunek2 = -1;
@@ -350,7 +339,18 @@ export default class Board extends React.Component {
                                 }
                             }
                         }
+                    } else {
+                    let kierunek;
+                    if(this.state.firstClickRow > row) kierunek = 1;
+                    else kierunek = -1;
+                    let kierunek2;
+                    if(this.state.firstClickCol > col) kierunek2 = 1;
+                    else kierunek2 = -1;
+                    let i,j;
+                    for(i = row+kierunek, j = col+kierunek2; i!= this.state.firstClickRow; i+=kierunek, j+=kierunek2) {
+                        if(this.state.piece[i][j]!="") czyPustePola=false;
                     }
+                }
                     if(czyPustePola && this.state.player[row][col]!="1") {
                         let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
                         let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
