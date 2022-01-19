@@ -155,12 +155,24 @@ export default class Board extends React.Component {
                     else kierunek = 2;
                     console.log(kierunek);
                     let czyPustePola = true;
-                    let kierunek2;
-                    if(col-this.state.firstClickCol > 0) kierunek2 = -1;
-                    else kierunek2 = 1;
                     if(kierunek==1) {
+                        let kierunek2;
+                        if(col-this.state.firstClickCol > 0) kierunek2 = -1;
+                        else kierunek2 = 1;
                         for(let i=col; i!=this.state.firstClickCol; i+=kierunek2) {
                             if(this.state.piece[row][i]!="")
+                            { 
+                                czyPustePola = false;
+                                console.log(czyPustePola)
+                                //break;
+                            }
+                        }
+                    } else {
+                        let kierunek2;
+                        if(row-this.state.firstClickRow > 0) kierunek2 = -1;
+                        else kierunek2 = 1;
+                        for(let i=row; i!=this.state.firstClickRow; i+=kierunek2) {
+                            if(this.state.piece[i][col]!="")
                             { 
                                 czyPustePola = false;
                                 console.log(czyPustePola)
