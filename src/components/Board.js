@@ -159,7 +159,7 @@ export default class Board extends React.Component {
                         let kierunek2;
                         if(col-this.state.firstClickCol > 0) kierunek2 = -1;
                         else kierunek2 = 1;
-                        for(let i=col; i!=this.state.firstClickCol; i+=kierunek2) {
+                        for(let i=col+kierunek2; i!=this.state.firstClickCol; i+=kierunek2) {
                             if(this.state.piece[row][i]!="")
                             { 
                                 czyPustePola = false;
@@ -171,7 +171,7 @@ export default class Board extends React.Component {
                         let kierunek2;
                         if(row-this.state.firstClickRow > 0) kierunek2 = -1;
                         else kierunek2 = 1;
-                        for(let i=row; i!=this.state.firstClickRow; i+=kierunek2) {
+                        for(let i=row+kierunek2; i!=this.state.firstClickRow; i+=kierunek2) {
                             if(this.state.piece[i][col]!="")
                             { 
                                 czyPustePola = false;
@@ -180,7 +180,7 @@ export default class Board extends React.Component {
                             }
                         }
                     }
-                    if(czyPustePola) {
+                    if(czyPustePola && this.state.player[row][col]!="1") {
                         //console.log("Yey!")
                         let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
                         let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
