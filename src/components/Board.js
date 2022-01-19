@@ -393,18 +393,31 @@ export default class Board extends React.Component {
                     || (row == (this.state.firstClickRow + 7) && col == (this.state.firstClickCol - 7)) || (row == (this.state.firstClickRow - 7) && col == (this.state.firstClickCol + 7))
                     || (row == (this.state.firstClickRow + 8) && col == (this.state.firstClickCol - 8)) || (row == (this.state.firstClickRow - 8) && col == (this.state.firstClickCol + 8)))  && this.state.player[row][col]!="1")
                 {
-                    let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
-                    let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
-                    newPiece[this.state.firstClickRow][this.state.firstClickCol] = "";
-                    newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
-                    newPiece[row][col] = "bishop";
-                    newPlayer[row][col] = "1";
-                    this.setState({
-                        piece: newPiece,
-                        player: newPlayer,
-                        whichPlayer: "2",
-                        error: ""
-                    });
+                    let czyPustePola = true;
+                    let kierunek;
+                    if(this.state.firstClickRow > row) kierunek = 1;
+                    else kierunek = -1;
+                    let kierunek2;
+                    if(this.state.firstClickCol > col) kierunek2 = 1;
+                    else kierunek2 = -1;
+                    let i,j;
+                    for(i = row, j = col; i!= this.state.firstClickCol; i+=kierunek, j+=kierunek2) {
+                        if(this.state.piece[i][j]=="") czyPustePola=false;
+                    }
+                    if(czyPustePola) {
+                        let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
+                        let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
+                        newPiece[this.state.firstClickRow][this.state.firstClickCol] = "";
+                        newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
+                        newPiece[row][col] = "bishop";
+                        newPlayer[row][col] = "1";
+                        this.setState({
+                            piece: newPiece,
+                            player: newPlayer,
+                            whichPlayer: "2",
+                            error: ""
+                        });
+                    }
                 }
                 else
                 {
