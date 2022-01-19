@@ -150,19 +150,30 @@ export default class Board extends React.Component {
             if(this.state.firstClickPlayer == "1") {
                 if((col == this.state.firstClickCol || row == this.state.firstClickRow) && this.state.player[row][col]!="1")
                 {
-                    //console.log("Yey!")
-                    let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
-                    let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
-                    newPiece[this.state.firstClickRow][this.state.firstClickCol] = "";
-                    newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
-                    newPiece[row][col] = "rook";
-                    newPlayer[row][col] = "1";
-                    this.setState({
-                        piece: newPiece,
-                        player: newPlayer,
-                        whichPlayer: "2",
-                        error: ""
-                    });
+                    let kierunek;
+                    if(this.statefirstClickCol== col) kierunek = 1;
+                    else kierunek = 2;
+                    let czyPustePola = true;
+                    if(kierunek==1) {
+                        for(let i=col; i>this.state.firstClickCol; i--) {
+                            if(this.state.piece[row][i]!="") czyPustePola = false;
+                        }
+                    }
+                    if(czyPustePola) {
+                        //console.log("Yey!")
+                        let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
+                        let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
+                        newPiece[this.state.firstClickRow][this.state.firstClickCol] = "";
+                        newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
+                        newPiece[row][col] = "rook";
+                        newPlayer[row][col] = "1";
+                        this.setState({
+                            piece: newPiece,
+                            player: newPlayer,
+                            whichPlayer: "2",
+                            error: ""
+                        });
+                    }
                 }
                 else
                 {
