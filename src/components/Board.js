@@ -79,7 +79,7 @@ export default class Board extends React.Component {
             if(this.state.firstClickPlayer == "1") {
                 if(((row == this.state.firstClickRow - 1 || (this.state.firstClickRow == 6 && row == this.state.firstClickRow - 2)) 
                     && this.state.piece[row][col] == "" && col == this.state.firstClickCol) 
-                    || (row == this.state.firstClickRow - 1 && (col == (this.state.firstClickCol + 1) ||  col == (this.state.firstClickCol - 1)))) {
+                    || (row == this.state.firstClickRow - 1 && (col == (this.state.firstClickCol + 1) ||  col == (this.state.firstClickCol - 1)) && this.state.piece[row][col]!="" && this.state.player[row][col]=="2")) {
                     let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
                     let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
                     newPiece[this.state.firstClickRow][this.state.firstClickCol] = "";
@@ -110,7 +110,7 @@ export default class Board extends React.Component {
                     || (this.state.firstClickRow == 1 
                     && row == this.state.firstClickRow + 2)) 
                     && this.state.piece[row][col] == "" 
-                    && col == this.state.firstClickCol) || (row == this.state.firstClickRow + 1 && (col == (this.state.firstClickCol + 1) ||  col == (this.state.firstClickCol - 1)))) {
+                    && col == this.state.firstClickCol) || (row == this.state.firstClickRow + 1 && (col == (this.state.firstClickCol + 1) ||  col == (this.state.firstClickCol - 1)) && this.state.piece[row][col]!="" && this.state.player[row][col]=="1")) {
 
                     let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
                     let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
