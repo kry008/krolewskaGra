@@ -147,7 +147,7 @@ export default class Board extends React.Component {
             //console.log(this.state)
             //console.log("col" + col + " row" + row)
             if(this.state.firstClickPlayer == "1") {
-                if(col == this.state.firstClickCol || row == this.state.firstClickRow)
+                if((col == this.state.firstClickCol || row == this.state.firstClickRow) && this.state.player[row][col]!="1")
                 {
                     //console.log("Yey!")
                     let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
@@ -174,7 +174,7 @@ export default class Board extends React.Component {
             }
             else
             {
-                if(col == this.state.firstClickCol || row == this.state.firstClickRow)
+                if((col == this.state.firstClickCol || row == this.state.firstClickRow) && this.state.player[row][col]!="2")
                 {
                     //console.log("Yey!")
                     let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
@@ -203,7 +203,7 @@ export default class Board extends React.Component {
         {
             if(this.state.firstClickPlayer == "1")
             {
-                if(col == (this.state.firstClickCol + 1) || col == (this.state.firstClickCol - 1) || row == (this.state.firstClickRow + 1) || row == (this.state.firstClickRow - 1))
+                if((col == (this.state.firstClickCol + 1) || col == (this.state.firstClickCol - 1) || row == (this.state.firstClickRow + 1) || row == (this.state.firstClickRow - 1)) && this.state.player[row][col]!="1")
                 {
                     let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
                     let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
@@ -229,7 +229,7 @@ export default class Board extends React.Component {
             }
             else
             {
-                if(col == (this.state.firstClickCol + 1) || col == (this.state.firstClickCol - 1) || row == (this.state.firstClickRow + 1) || row == (this.state.firstClickRow - 1))
+                if((col == (this.state.firstClickCol + 1) || col == (this.state.firstClickCol - 1) || row == (this.state.firstClickRow + 1) || row == (this.state.firstClickRow - 1))  && this.state.player[row][col]!="2")
                 {
                     let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
                     let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
@@ -257,7 +257,7 @@ export default class Board extends React.Component {
         {
             if(this.state.firstClickPlayer == "1")
             {
-                if(col == this.state.firstClickCol || row == this.state.firstClickRow 
+                if((col == this.state.firstClickCol || row == this.state.firstClickRow 
                     || (row == (this.state.firstClickRow + 1) && col == (this.state.firstClickCol + 1)) || (row == (this.state.firstClickRow - 1) && col == (this.state.firstClickCol - 1))
                     || (row == (this.state.firstClickRow + 2) && col == (this.state.firstClickCol + 2)) || (row == (this.state.firstClickRow - 2) && col == (this.state.firstClickCol - 2))
                     || (row == (this.state.firstClickRow + 3) && col == (this.state.firstClickCol + 3)) || (row == (this.state.firstClickRow - 3) && col == (this.state.firstClickCol - 3))
@@ -273,7 +273,7 @@ export default class Board extends React.Component {
                     || (row == (this.state.firstClickRow + 5) && col == (this.state.firstClickCol - 5)) || (row == (this.state.firstClickRow - 5) && col == (this.state.firstClickCol + 5))
                     || (row == (this.state.firstClickRow + 6) && col == (this.state.firstClickCol - 6)) || (row == (this.state.firstClickRow - 6) && col == (this.state.firstClickCol + 6))
                     || (row == (this.state.firstClickRow + 7) && col == (this.state.firstClickCol - 7)) || (row == (this.state.firstClickRow - 7) && col == (this.state.firstClickCol + 7))
-                    || (row == (this.state.firstClickRow + 8) && col == (this.state.firstClickCol - 8)) || (row == (this.state.firstClickRow - 8) && col == (this.state.firstClickCol + 8)))
+                    || (row == (this.state.firstClickRow + 8) && col == (this.state.firstClickCol - 8)) || (row == (this.state.firstClickRow - 8) && col == (this.state.firstClickCol + 8)))  && this.state.player[row][col]!="1")
                 {
                     let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
                     let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
@@ -299,7 +299,7 @@ export default class Board extends React.Component {
             }
             else
             {
-                if(col == this.state.firstClickCol || row == this.state.firstClickRow 
+                if((col == this.state.firstClickCol || row == this.state.firstClickRow 
                     || (row == (this.state.firstClickRow + 1) && col == (this.state.firstClickCol + 1)) || (row == (this.state.firstClickRow - 1) && col == (this.state.firstClickCol - 1))
                     || (row == (this.state.firstClickRow + 2) && col == (this.state.firstClickCol + 2)) || (row == (this.state.firstClickRow - 2) && col == (this.state.firstClickCol - 2))
                     || (row == (this.state.firstClickRow + 3) && col == (this.state.firstClickCol + 3)) || (row == (this.state.firstClickRow - 3) && col == (this.state.firstClickCol - 3))
@@ -315,7 +315,7 @@ export default class Board extends React.Component {
                     || (row == (this.state.firstClickRow + 5) && col == (this.state.firstClickCol - 5)) || (row == (this.state.firstClickRow - 5) && col == (this.state.firstClickCol + 5))
                     || (row == (this.state.firstClickRow + 6) && col == (this.state.firstClickCol - 6)) || (row == (this.state.firstClickRow - 6) && col == (this.state.firstClickCol + 6))
                     || (row == (this.state.firstClickRow + 7) && col == (this.state.firstClickCol - 7)) || (row == (this.state.firstClickRow - 7) && col == (this.state.firstClickCol + 7))
-                    || (row == (this.state.firstClickRow + 8) && col == (this.state.firstClickCol - 8)) || (row == (this.state.firstClickRow - 8) && col == (this.state.firstClickCol + 8)))
+                    || (row == (this.state.firstClickRow + 8) && col == (this.state.firstClickCol - 8)) || (row == (this.state.firstClickRow - 8) && col == (this.state.firstClickCol + 8)))  && this.state.player[row][col]!="2")
                 {
                     let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
                     let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
@@ -343,7 +343,7 @@ export default class Board extends React.Component {
         {
             if(this.state.firstClickPlayer == "1")
             {
-                if((row == (this.state.firstClickRow + 1) && col == (this.state.firstClickCol + 1)) || (row == (this.state.firstClickRow - 1) && col == (this.state.firstClickCol - 1))
+                if(((row == (this.state.firstClickRow + 1) && col == (this.state.firstClickCol + 1)) || (row == (this.state.firstClickRow - 1) && col == (this.state.firstClickCol - 1))
                     || (row == (this.state.firstClickRow + 2) && col == (this.state.firstClickCol + 2)) || (row == (this.state.firstClickRow - 2) && col == (this.state.firstClickCol - 2))
                     || (row == (this.state.firstClickRow + 3) && col == (this.state.firstClickCol + 3)) || (row == (this.state.firstClickRow - 3) && col == (this.state.firstClickCol - 3))
                     || (row == (this.state.firstClickRow + 4) && col == (this.state.firstClickCol + 4)) || (row == (this.state.firstClickRow - 4) && col == (this.state.firstClickCol - 4))
@@ -358,7 +358,7 @@ export default class Board extends React.Component {
                     || (row == (this.state.firstClickRow + 5) && col == (this.state.firstClickCol - 5)) || (row == (this.state.firstClickRow - 5) && col == (this.state.firstClickCol + 5))
                     || (row == (this.state.firstClickRow + 6) && col == (this.state.firstClickCol - 6)) || (row == (this.state.firstClickRow - 6) && col == (this.state.firstClickCol + 6))
                     || (row == (this.state.firstClickRow + 7) && col == (this.state.firstClickCol - 7)) || (row == (this.state.firstClickRow - 7) && col == (this.state.firstClickCol + 7))
-                    || (row == (this.state.firstClickRow + 8) && col == (this.state.firstClickCol - 8)) || (row == (this.state.firstClickRow - 8) && col == (this.state.firstClickCol + 8)))
+                    || (row == (this.state.firstClickRow + 8) && col == (this.state.firstClickCol - 8)) || (row == (this.state.firstClickRow - 8) && col == (this.state.firstClickCol + 8)))  && this.state.player[row][col]!="1")
                 {
                     let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
                     let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
@@ -384,7 +384,7 @@ export default class Board extends React.Component {
             }
             else
             {
-                if((row == (this.state.firstClickRow + 1) && col == (this.state.firstClickCol + 1)) || (row == (this.state.firstClickRow - 1) && col == (this.state.firstClickCol - 1))
+                if(((row == (this.state.firstClickRow + 1) && col == (this.state.firstClickCol + 1)) || (row == (this.state.firstClickRow - 1) && col == (this.state.firstClickCol - 1))
                     || (row == (this.state.firstClickRow + 2) && col == (this.state.firstClickCol + 2)) || (row == (this.state.firstClickRow - 2) && col == (this.state.firstClickCol - 2))
                     || (row == (this.state.firstClickRow + 3) && col == (this.state.firstClickCol + 3)) || (row == (this.state.firstClickRow - 3) && col == (this.state.firstClickCol - 3))
                     || (row == (this.state.firstClickRow + 4) && col == (this.state.firstClickCol + 4)) || (row == (this.state.firstClickRow - 4) && col == (this.state.firstClickCol - 4))
@@ -399,7 +399,7 @@ export default class Board extends React.Component {
                     || (row == (this.state.firstClickRow + 5) && col == (this.state.firstClickCol - 5)) || (row == (this.state.firstClickRow - 5) && col == (this.state.firstClickCol + 5))
                     || (row == (this.state.firstClickRow + 6) && col == (this.state.firstClickCol - 6)) || (row == (this.state.firstClickRow - 6) && col == (this.state.firstClickCol + 6))
                     || (row == (this.state.firstClickRow + 7) && col == (this.state.firstClickCol - 7)) || (row == (this.state.firstClickRow - 7) && col == (this.state.firstClickCol + 7))
-                    || (row == (this.state.firstClickRow + 8) && col == (this.state.firstClickCol - 8)) || (row == (this.state.firstClickRow - 8) && col == (this.state.firstClickCol + 8)))
+                    || (row == (this.state.firstClickRow + 8) && col == (this.state.firstClickCol - 8)) || (row == (this.state.firstClickRow - 8) && col == (this.state.firstClickCol + 8)))  && this.state.player[row][col]!="2")
                 {
                     let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
                     let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
@@ -427,10 +427,10 @@ export default class Board extends React.Component {
         {
             if(this.state.firstClickPlayer == "1")
             {
-                if(row == (this.state.firstClickRow - 2) && col == (this.state.firstClickCol + 1) || row == (this.state.firstClickRow - 2) && col == (this.state.firstClickCol - 1)
+                if((row == (this.state.firstClickRow - 2) && col == (this.state.firstClickCol + 1) || row == (this.state.firstClickRow - 2) && col == (this.state.firstClickCol - 1)
                 || row == (this.state.firstClickRow - 1) && col == (this.state.firstClickCol + 2) || row == (this.state.firstClickRow - 1) && col == (this.state.firstClickCol - 2)
                 || row == (this.state.firstClickRow + 2) && col == (this.state.firstClickCol - 1) || row == (this.state.firstClickRow + 2) && col == (this.state.firstClickCol + 1)
-                || row == (this.state.firstClickRow + 1) && col == (this.state.firstClickCol - 2) || row == (this.state.firstClickRow + 1) && col == (this.state.firstClickCol + 2))
+                || row == (this.state.firstClickRow + 1) && col == (this.state.firstClickCol - 2) || row == (this.state.firstClickRow + 1) && col == (this.state.firstClickCol + 2))  && this.state.player[row][col]!="1")
                 {
                     let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
                     let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
@@ -456,10 +456,10 @@ export default class Board extends React.Component {
             }
             else
             {
-                if(row == (this.state.firstClickRow - 2) && col == (this.state.firstClickCol + 1) || row == (this.state.firstClickRow - 2) && col == (this.state.firstClickCol - 1)
+                if((row == (this.state.firstClickRow - 2) && col == (this.state.firstClickCol + 1) || row == (this.state.firstClickRow - 2) && col == (this.state.firstClickCol - 1)
                 || row == (this.state.firstClickRow - 1) && col == (this.state.firstClickCol + 2) || row == (this.state.firstClickRow - 1) && col == (this.state.firstClickCol - 2)
                 || row == (this.state.firstClickRow + 2) && col == (this.state.firstClickCol - 1) || row == (this.state.firstClickRow + 2) && col == (this.state.firstClickCol + 1)
-                || row == (this.state.firstClickRow + 1) && col == (this.state.firstClickCol - 2) || row == (this.state.firstClickRow + 1) && col == (this.state.firstClickCol + 2))
+                || row == (this.state.firstClickRow + 1) && col == (this.state.firstClickCol - 2) || row == (this.state.firstClickRow + 1) && col == (this.state.firstClickCol + 2))  && this.state.player[row][col]!="2")
                 {
                     let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
                     let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
