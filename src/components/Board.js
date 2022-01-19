@@ -75,6 +75,7 @@ export default class Board extends React.Component {
 
 
     doMove(row, col) {
+        console.log("ROW1: " + row + " COL1: " + col)
         if (this.state.firstClickPiece == "pawn") {
             if(this.state.firstClickPlayer == "1") {
                 if(((row == this.state.firstClickRow - 1 || (this.state.firstClickRow == 6 && row == this.state.firstClickRow - 2)) 
@@ -487,7 +488,9 @@ export default class Board extends React.Component {
     }
 
     squareClicked(row, col) {
-        if(this.state.firstClickCol == "") {
+        //console.log("ROW: " + row + " COL: " + col)
+        //console.log("AAA: " + this.state.player[row][col] + " " + this.state.whichPlayer)
+        if(this.state.firstClickCol === "") {
             if(this.state.player[row][col] == this.state.whichPlayer) {
                 this.setState({firstClickCol: col, firstClickRow: row, firstClickPiece: this.state.piece[row][col], firstClickPlayer: this.state.player[row][col]});
             } 
