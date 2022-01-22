@@ -74,8 +74,12 @@ export default class Board extends React.Component {
         };
         this.squareClicked = this.squareClicked.bind(this);
         this.doMove = this.doMove.bind(this);
+        this.undoMove = this.undoMove.bind(this);
     }
-
+    undoMove()
+    {
+        console.log("Do cofania gotowe");
+    }
 
     doMove(row, col) {
         
@@ -759,6 +763,18 @@ export default class Board extends React.Component {
                 <div id="board">{board}</div>
                 <div id="movePlayer">{this.state.whichPlayer == 1?"Ruch białych":"Ruch czarnych"}</div>
                 <div id="infoGame"><p style={{color: "red"}}>{this.state.error}</p></div>
+                <div id="wroc"><button onClick={() =>
+                {
+                    if(this.state.stepNumber == "0")
+                    {
+                        alert("Jeszcze nie wykonano ruchu, aby móc się cofać")
+                    }
+                    else
+                    {
+                        console.log("Jestem tutaj");
+                        this.undoMove()
+                    }
+                }}>Cofnij ruch</button></div>
             </div>
         )
     }
