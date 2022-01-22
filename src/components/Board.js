@@ -79,6 +79,28 @@ export default class Board extends React.Component {
     undoMove()
     {
         console.log("Do cofania gotowe");
+        var playerColor = this.state.stepNumber % 2;
+        console.log(playerColor)
+        var whichPlayer = "2"
+        var temp1 = this.state.prevStatesPiece[this.state.stepNumber - 1]
+        var temp2 = this.state.prevStatesPlayer[this.state.stepNumber - 1]
+        var temp3 = this.state.prevStatesPlayer;
+        temp3.pop()
+        var temp4 = this.state.prevStatesPiece;
+        temp4.pop()
+        if(playerColor == 1)
+        {
+            whichPlayer = "1"
+        }
+        var move = this.state.stepNumber - 1
+        this.setState({
+            whichPlayer: whichPlayer,
+            piece: temp1,
+            player: temp2,
+            prevStatesPlayer: temp3,
+            prevStatesPiece: temp4,
+            stepNumber: move
+        })
     }
 
     doMove(row, col) {
