@@ -104,6 +104,7 @@ export default class Board extends React.Component {
                         error: "",
                         stepNumber: stepNumber + 1
                     });
+                    return true;
                 }
                 else
                 {
@@ -135,8 +136,7 @@ export default class Board extends React.Component {
                         error: "",
                         stepNumber: stepNumber + 1
                     });
-                    
-                
+                    return true;
                 }
                 else
                 {
@@ -198,6 +198,7 @@ export default class Board extends React.Component {
                             error: "",
                             stepNumber: stepNumber + 1
                         });
+                        return true;
                     }
                     else
                     {
@@ -260,6 +261,7 @@ export default class Board extends React.Component {
                             error: "",
                             stepNumber: stepNumber + 1
                         });
+                        return true;
                     }
                     else
                     {
@@ -292,6 +294,7 @@ export default class Board extends React.Component {
                         error: "",
                         stepNumber: stepNumber + 1
                     });
+                    return true;
                 }
                 else
                 {
@@ -317,6 +320,7 @@ export default class Board extends React.Component {
                         error: "",
                         stepNumber: stepNumber + 1
                     });
+                    return true;
                 }
                 else
                 {
@@ -364,7 +368,9 @@ export default class Board extends React.Component {
                                     //break;
                                 }
                             }
-                        } else {
+                        }
+                        else 
+                        {
                             let kierunek2;
                             if(row-this.state.firstClickRow > 0) kierunek2 = -1;
                             else kierunek2 = 1;
@@ -377,7 +383,9 @@ export default class Board extends React.Component {
                                 }
                             }
                         }
-                    } else {
+                    } 
+                    else 
+                    {
                         let kierunek;
                         if(this.state.firstClickRow > row) kierunek = 1;
                         else kierunek = -1;
@@ -387,8 +395,8 @@ export default class Board extends React.Component {
                         let i,j;
                         for(i = row+kierunek, j = col+kierunek2; i!= this.state.firstClickRow; i+=kierunek, j+=kierunek2) {
                             if(this.state.piece[i][j]!="") czyPustePola=false;
+                        }
                     }
-                }
                     if(czyPustePola && this.state.player[row][col]!="1") {
                         let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
                         let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
@@ -404,6 +412,7 @@ export default class Board extends React.Component {
                             error: "",
                             stepNumber: stepNumber + 1
                         });
+                        return true;
                     }
                     else
                     {
@@ -454,7 +463,8 @@ export default class Board extends React.Component {
                                     //break;
                                 }
                             }
-                        } else {
+                        } 
+                        else {
                             let kierunek2;
                             if(row-this.state.firstClickRow > 0) kierunek2 = -1;
                             else kierunek2 = 1;
@@ -467,7 +477,9 @@ export default class Board extends React.Component {
                                 }
                             }
                         }
-                    } else {
+                    } 
+                    else 
+                    {
                         let kierunek;
                         if(this.state.firstClickRow > row) kierunek = 1;
                         else kierunek = -1;
@@ -477,8 +489,8 @@ export default class Board extends React.Component {
                         let i,j;
                         for(i = row+kierunek, j = col+kierunek2; i!= this.state.firstClickRow; i+=kierunek, j+=kierunek2) {
                             if(this.state.piece[i][j]!="") czyPustePola=false;
+                        }
                     }
-                }
                         if(czyPustePola && this.state.player[row][col]!="2") {
                         let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
                         let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
@@ -494,6 +506,7 @@ export default class Board extends React.Component {
                             error: "",
                             stepNumber: stepNumber + 1
                         });
+                        return true;
                     }
                     else
                     {
@@ -553,6 +566,7 @@ export default class Board extends React.Component {
                             error: "",
                             stepNumber: stepNumber + 1
                         });
+                        return true;
                     }
                     else
                     {
@@ -610,6 +624,7 @@ export default class Board extends React.Component {
                             error: "",
                             stepNumber: stepNumber + 1
                         });
+                        return true;
                     }
                     else
                     {
@@ -645,6 +660,7 @@ export default class Board extends React.Component {
                         error: "",
                         stepNumber: stepNumber + 1
                     });
+                    return true;
                 }
                 else
                 {                    
@@ -673,6 +689,7 @@ export default class Board extends React.Component {
                         error: "",
                         stepNumber: stepNumber + 1
                     });
+                    return true;
                 }
                 else
                 {                    
@@ -701,7 +718,14 @@ export default class Board extends React.Component {
             {
                 this.showError("Nie ten gracz");
             }
-        } else this.doMove(row, col);
+        } else 
+        {
+            var wynik = this.doMove(row, col);
+            if(wynik)
+            {
+                //Ruch wykonany
+            }
+        }
     }
 
     render()
