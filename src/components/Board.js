@@ -195,8 +195,7 @@ export default class Board extends React.Component {
                             piece: newPiece,
                             player: newPlayer,
                             whichPlayer: "2",
-                            error: "",
-                            stepNumber: stepNumber + 1
+                            error: ""
                         });
                         return true;
                     }
@@ -258,8 +257,7 @@ export default class Board extends React.Component {
                             piece: newPiece,
                             player: newPlayer,
                             whichPlayer: "1",
-                            error: "",
-                            stepNumber: stepNumber + 1
+                            error: ""
                         });
                         return true;
                     }
@@ -409,8 +407,7 @@ export default class Board extends React.Component {
                             piece: newPiece,
                             player: newPlayer,
                             whichPlayer: "2",
-                            error: "",
-                            stepNumber: stepNumber + 1
+                            error: ""
                         });
                         return true;
                     }
@@ -503,8 +500,7 @@ export default class Board extends React.Component {
                             piece: newPiece,
                             player: newPlayer,
                             whichPlayer: "1",
-                            error: "",
-                            stepNumber: stepNumber + 1
+                            error: ""
                         });
                         return true;
                     }
@@ -563,8 +559,7 @@ export default class Board extends React.Component {
                             piece: newPiece,
                             player: newPlayer,
                             whichPlayer: "2",
-                            error: "",
-                            stepNumber: stepNumber + 1
+                            error: ""
                         });
                         return true;
                     }
@@ -621,8 +616,7 @@ export default class Board extends React.Component {
                             piece: newPiece,
                             player: newPlayer,
                             whichPlayer: "1",
-                            error: "",
-                            stepNumber: stepNumber + 1
+                            error: ""
                         });
                         return true;
                     }
@@ -657,8 +651,7 @@ export default class Board extends React.Component {
                         piece: newPiece,
                         player: newPlayer,
                         whichPlayer: "2",
-                        error: "",
-                        stepNumber: stepNumber + 1
+                        error: ""
                     });
                     return true;
                 }
@@ -686,8 +679,7 @@ export default class Board extends React.Component {
                         piece: newPiece,
                         player: newPlayer,
                         whichPlayer: "1",
-                        error: "",
-                        stepNumber: stepNumber + 1
+                        error: ""
                     });
                     return true;
                 }
@@ -697,7 +689,6 @@ export default class Board extends React.Component {
                 }
             }
         }
-        this.setState({firstClickCol: "", firstClickRow: "", firstClickPiece: "", firstClickPlayer: ""});
     }
 
     showError(err) {
@@ -723,6 +714,22 @@ export default class Board extends React.Component {
             var wynik = this.doMove(row, col);
             if(wynik)
             {
+                var temp1 = this.state.piece;
+                var temp2 = this.state.prevStatesPiece;
+                temp2.push(temp1)
+                var temp3 = this.state.player;
+                var temp4 = this.state.prevStatesPlayer
+                var temp5 = this.state.stepNumber + 1;
+                temp4.push(temp3)
+                this.setState({
+                    prevStatesPiece: temp2,
+                    prevStatesPlayer: temp4,
+                    stepNumber: temp5,
+                    firstClickCol: "",
+                    firstClickRow: "",
+                    firstClickPiece: "",
+                    firstClickPlayer: ""
+                })
                 //Ruch wykonany
             }
         }
