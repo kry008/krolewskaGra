@@ -195,13 +195,14 @@ export default class Board extends React.Component {
                             error: ""
                         });
                     }
+                    else
+                    {
+                        this.showError("Tego ruchu nie można wykonać");
+                    }
                 }
                 else
                 {
-                    this.setState({error: "Wybierz poprawny ruch"})
-                    setTimeout(() => {
-                        this.setState({error: ""}); 
-                    }, 650);
+                    this.showError("Wybierz poprawny ruch");
                 }
 
             }
@@ -254,13 +255,14 @@ export default class Board extends React.Component {
                             error: ""
                         });
                     }
+                    else
+                    {
+                        this.showError("Tego ruchu nie można wykonać");
+                    }
                 }
                 else
                 {
-                    this.setState({error: "Wybierz poprawny ruch"})
-                    setTimeout(() => {
-                        this.setState({error: ""}); 
-                    }, 650);
+                    this.showError("Wybierz poprawny ruch");
                 }
             }
         }
@@ -285,10 +287,7 @@ export default class Board extends React.Component {
                 }
                 else
                 {
-                    this.setState({error: "Wybierz poprawny ruch"})
-                    setTimeout(() => {
-                        this.setState({error: ""}); 
-                    }, 650);
+                    this.showError("Wybierz poprawny ruch");
                 }
 
             }
@@ -311,10 +310,7 @@ export default class Board extends React.Component {
                 }
                 else
                 {
-                    this.setState({error: "Wybierz poprawny ruch"})
-                    setTimeout(() => {
-                        this.setState({error: ""}); 
-                    }, 650);
+                    this.showError("Wybierz poprawny ruch");
                 }
             }
         }
@@ -397,13 +393,14 @@ export default class Board extends React.Component {
                             error: ""
                         });
                     }
+                    else
+                    {
+                        this.showError("Tego ruchu nie można wykonać");
+                    }
                 }
                 else
                 {
-                    this.setState({error: "Wybierz poprawny ruch"})
-                    setTimeout(() => {
-                        this.setState({error: ""}); 
-                    }, 650);
+                    this.showError("Wybierz poprawny ruch");
                 }
 
             }
@@ -484,13 +481,14 @@ export default class Board extends React.Component {
                             error: ""
                         });
                     }
+                    else
+                    {
+                        this.showError("Tego ruchu nie można wykonać");
+                    }
                 }
                 else
                 {
-                    this.setState({error: "Wybierz poprawny ruch"})
-                    setTimeout(() => {
-                        this.setState({error: ""}); 
-                    }, 650);
+                    this.showError("Wybierz poprawny ruch");
                 }
             }
         }
@@ -540,13 +538,14 @@ export default class Board extends React.Component {
                             error: ""
                         });
                     }
+                    else
+                    {
+                        this.showError("Tego ruchu nie można wykonać");
+                    }
                 }
                 else
                 {
-                    this.setState({error: "Wybierz poprawny ruch"})
-                    setTimeout(() => {
-                        this.setState({error: ""}); 
-                    }, 650);
+                    this.showError("Wybierz poprawny ruch");
                 }
 
             }
@@ -594,13 +593,14 @@ export default class Board extends React.Component {
                             error: ""
                         });
                     }
+                    else
+                    {
+                        this.showError("Tego ruchu nie można wykonać");
+                    }
                 }
                 else
                 {
-                    this.setState({error: "Wybierz poprawny ruch"})
-                    setTimeout(() => {
-                        this.setState({error: ""}); 
-                    }, 650);
+                    this.showError("Wybierz poprawny ruch");
                 }
             }
         }
@@ -627,11 +627,8 @@ export default class Board extends React.Component {
                     });
                 }
                 else
-                {
-                    this.setState({error: "Wybierz poprawny ruch"})
-                    setTimeout(() => {
-                        this.setState({error: ""}); 
-                    }, 650);
+                {                    
+                    this.showError("Wybierz poprawny ruch");
                 }
 
             }
@@ -656,15 +653,19 @@ export default class Board extends React.Component {
                     });
                 }
                 else
-                {
-                    this.setState({error: "Wybierz poprawny ruch"})
-                    setTimeout(() => {
-                        this.setState({error: ""}); 
-                    }, 650);
+                {                    
+                    this.showError("Wybierz poprawny ruch");
                 }
             }
         }
         this.setState({firstClickCol: "", firstClickRow: "", firstClickPiece: "", firstClickPlayer: ""});
+    }
+
+    showError(err) {
+        this.setState({ error: err });
+        setTimeout(() => {
+            this.setState({ error: "" });
+        }, 650);
     }
 
     squareClicked(row, col) {
