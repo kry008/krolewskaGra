@@ -9,7 +9,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <div id="page">
-    SZABLON HTML
+    Szachy React
     <Game />
 </div>,
   document.getElementById('root')

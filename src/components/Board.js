@@ -67,7 +67,10 @@ export default class Board extends React.Component {
             ["", "", "", "", "", "", "", ""],
             ["1", "1", "1", "1", "1", "1", "1", "1"],
             ["1", "1", "1", "1", "1", "1", "1", "1"]],
-            error: ""
+            error: "",
+            prevStatesPlayer: [],
+            prevStatesPiece: [],
+            stepNumber: 0
         };
         this.squareClicked = this.squareClicked.bind(this);
         this.doMove = this.doMove.bind(this);
@@ -75,6 +78,7 @@ export default class Board extends React.Component {
 
 
     doMove(row, col) {
+        
         console.log("ROW1: " + row + " COL1: " + col)
         if (this.state.firstClickPiece == "pawn") {
             if(this.state.firstClickPlayer == "1") {
@@ -87,6 +91,7 @@ export default class Board extends React.Component {
                     newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
                     newPiece[row][col] = "pawn";
                     newPlayer[row][col] = "1";
+                    var stepNumber = this.state.stepNumber;
                     console.log("TUTAJ PATRZ1: " + row)
                     if(row == "0")
                     {
@@ -96,15 +101,13 @@ export default class Board extends React.Component {
                         piece: newPiece,
                         player: newPlayer,
                         whichPlayer: "2",
-                        error: ""
+                        error: "",
+                        stepNumber: stepNumber + 1
                     });
                 }
                 else
                 {
-                    this.setState({error: "Wybierz poprawny ruch"})
-                    setTimeout(() => {
-                        this.setState({error: ""}); 
-                    }, 650);
+                    this.showError("Wybierz poprawny ruch");
                 }
             } else {
                 if(((row == this.state.firstClickRow + 1 
@@ -124,21 +127,20 @@ export default class Board extends React.Component {
                     {
                         newPiece[row][col] = "queen";
                     }
+                    var stepNumber = this.state.stepNumber;
                     this.setState({
                         piece: newPiece,
                         player: newPlayer,
                         whichPlayer: "1",
-                        error: ""
+                        error: "",
+                        stepNumber: stepNumber + 1
                     });
                     
                 
                 }
                 else
                 {
-                    this.setState({error: "Wybierz poprawny ruch"})
-                    setTimeout(() => {
-                        this.setState({error: ""}); 
-                    }, 650);
+                    this.showError("Wybierz poprawny ruch");
                 }
             
             }
@@ -188,11 +190,13 @@ export default class Board extends React.Component {
                         newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
                         newPiece[row][col] = "rook";
                         newPlayer[row][col] = "1";
+                        var stepNumber = this.state.stepNumber;
                         this.setState({
                             piece: newPiece,
                             player: newPlayer,
                             whichPlayer: "2",
-                            error: ""
+                            error: "",
+                            stepNumber: stepNumber + 1
                         });
                     }
                     else
@@ -248,11 +252,13 @@ export default class Board extends React.Component {
                         newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
                         newPiece[row][col] = "rook";
                         newPlayer[row][col] = "2";
+                        var stepNumber = this.state.stepNumber;
                         this.setState({
                             piece: newPiece,
                             player: newPlayer,
                             whichPlayer: "1",
-                            error: ""
+                            error: "",
+                            stepNumber: stepNumber + 1
                         });
                     }
                     else
@@ -278,11 +284,13 @@ export default class Board extends React.Component {
                     newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
                     newPiece[row][col] = "king";
                     newPlayer[row][col] = "1";
+                    var stepNumber = this.state.stepNumber;
                     this.setState({
                         piece: newPiece,
                         player: newPlayer,
                         whichPlayer: "2",
-                        error: ""
+                        error: "",
+                        stepNumber: stepNumber + 1
                     });
                 }
                 else
@@ -301,11 +309,13 @@ export default class Board extends React.Component {
                     newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
                     newPiece[row][col] = "king";
                     newPlayer[row][col] = "2";
+                    var stepNumber = this.state.stepNumber;
                     this.setState({
                         piece: newPiece,
                         player: newPlayer,
                         whichPlayer: "1",
-                        error: ""
+                        error: "",
+                        stepNumber: stepNumber + 1
                     });
                 }
                 else
@@ -386,11 +396,13 @@ export default class Board extends React.Component {
                         newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
                         newPiece[row][col] = "queen";
                         newPlayer[row][col] = "1";
+                        var stepNumber = this.state.stepNumber;
                         this.setState({
                             piece: newPiece,
                             player: newPlayer,
                             whichPlayer: "2",
-                            error: ""
+                            error: "",
+                            stepNumber: stepNumber + 1
                         });
                     }
                     else
@@ -474,11 +486,13 @@ export default class Board extends React.Component {
                         newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
                         newPiece[row][col] = "queen";
                         newPlayer[row][col] = "2";
+                        var stepNumber = this.state.stepNumber;
                         this.setState({
                             piece: newPiece,
                             player: newPlayer,
                             whichPlayer: "1",
-                            error: ""
+                            error: "",
+                            stepNumber: stepNumber + 1
                         });
                     }
                     else
@@ -531,11 +545,13 @@ export default class Board extends React.Component {
                         newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
                         newPiece[row][col] = "bishop";
                         newPlayer[row][col] = "1";
+                        var stepNumber = this.state.stepNumber;
                         this.setState({
                             piece: newPiece,
                             player: newPlayer,
                             whichPlayer: "2",
-                            error: ""
+                            error: "",
+                            stepNumber: stepNumber + 1
                         });
                     }
                     else
@@ -586,11 +602,13 @@ export default class Board extends React.Component {
                         newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
                         newPiece[row][col] = "bishop";
                         newPlayer[row][col] = "2";
+                        var stepNumber = this.state.stepNumber;
                         this.setState({
                             piece: newPiece,
                             player: newPlayer,
                             whichPlayer: "1",
-                            error: ""
+                            error: "",
+                            stepNumber: stepNumber + 1
                         });
                     }
                     else
@@ -619,11 +637,13 @@ export default class Board extends React.Component {
                     newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
                     newPiece[row][col] = "knight";
                     newPlayer[row][col] = "1";
+                    var stepNumber = this.state.stepNumber;
                     this.setState({
                         piece: newPiece,
                         player: newPlayer,
                         whichPlayer: "2",
-                        error: ""
+                        error: "",
+                        stepNumber: stepNumber + 1
                     });
                 }
                 else
@@ -645,11 +665,13 @@ export default class Board extends React.Component {
                     newPlayer[this.state.firstClickRow][this.state.firstClickCol] = "";
                     newPiece[row][col] = "knight";
                     newPlayer[row][col] = "2";
+                    var stepNumber = this.state.stepNumber;
                     this.setState({
                         piece: newPiece,
                         player: newPlayer,
                         whichPlayer: "1",
-                        error: ""
+                        error: "",
+                        stepNumber: stepNumber + 1
                     });
                 }
                 else
@@ -665,7 +687,7 @@ export default class Board extends React.Component {
         this.setState({ error: err });
         setTimeout(() => {
             this.setState({ error: "" });
-        }, 650);
+        }, 1000);
     }
 
     squareClicked(row, col) {
@@ -677,10 +699,7 @@ export default class Board extends React.Component {
             } 
             else 
             {
-                this.setState({error: "Nie ten gracz"});
-                setTimeout(() => {
-                    this.setState({error: ""}); 
-                }, 650);
+                this.showError("Nie ten gracz");
             }
         } else this.doMove(row, col);
     }
