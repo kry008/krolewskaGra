@@ -791,10 +791,9 @@ export default class Board extends React.Component {
                     }
                     else
                     {
-                        console.log("Jestem tutaj");
                         this.undoMove()
                     }
-                }}>Cofnij ruch</button></div>
+                }}>Cofnij ruch /{this.state.stepNumber}</button></div>
             </div>
         )
     }

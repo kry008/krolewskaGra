@@ -61,3 +61,20 @@ img {
   height: 46px;
   margin-top: 2px;
 }
+
+button
+{
+  background:#016ABC;
+  color:#fff;
+  border:1px solid #eee;
+  border-radius:20px;
+  text-shadow:none;
+  transition: 0.5s;
+  padding: 5px 20px;
+  font-weight: bold;
+}
+
+button:hover {
+  background:#B9DFFF;
+  color:#000000;
+}
