@@ -70,11 +70,15 @@ export default class Board extends React.Component {
             error: "",
             prevStatesPlayer: [],
             prevStatesPiece: [],
-            stepNumber: 0
+            stepNumber: 0,
+            whiteCheck: 0,
+            blackCheck: 0
         };
         this.squareClicked = this.squareClicked.bind(this);
         this.doMove = this.doMove.bind(this);
         this.undoMove = this.undoMove.bind(this);
+        this.isCheckOrMate = this.isCheckOrMate.bind(this);    
+        this.isWhiteInCheck = this.isWhiteInCheck.bind(this);
     }
     undoMove()
     {
@@ -99,6 +103,225 @@ export default class Board extends React.Component {
             prevStatesPiece: temp4,
             stepNumber: move
         })
+    }
+
+    isWhiteInCheck() {
+        for(let i=0; i<8; i++) {
+            for(let j=0; j<8; j++) {
+                if(this.state.piece[i][j]=="king" && this.state.player[i][j]=="1") {
+                    if(i>0 && j>0 && this.state.piece[i-1][j-1]=="pawn" && this.state.player[i-1][j-1]=="2") return true;
+                    if(i>0 && j<7 && this.state.piece[i-1][j+1]=="pawn" && this.state.player[i-1][j+1]=="2") return true;
+                    if(i<6 && j<7 && this.state.piece[i+2][j+1]=="knight" && this.state.player[i+2][j+1]=="2") return true;
+                    if(i<6 && j>0 && this.state.piece[i+2][j-1]=="knight" && this.state.player[i+2][j-1]=="2") return true;
+                    if(i>1 && j<7 && this.state.piece[i-2][j+1]=="knight" && this.state.player[i-2][j+1]=="2") return true;
+                    if(i>1 && j>0 && this.state.piece[i-2][j-1]=="knight" && this.state.player[i-2][j-1]=="2") return true;
+                    if(i<7 && j<6 && this.state.piece[i+1][j+2]=="knight" && this.state.player[i+1][j+2]=="2") return true;
+                    if(i<7 && j>1 && this.state.piece[i+1][j-2]=="knight" && this.state.player[i+1][j-2]=="2") return true;
+                    if(i>0 && j<6 && this.state.piece[i-1][j+2]=="knight" && this.state.player[i-1][j+2]=="2") return true;
+                    if(i>0 && j>1 && this.state.piece[i-1][j-2]=="knight" && this.state.player[i-1][j-2]=="2") return true;
+                    if(i>0 && j>0 && this.state.piece[i-1][j-1]=="king" && this.state.player[i-1][j-1]=="2") return true;
+                    if(i>0 && j<7 && this.state.piece[i-1][j+1]=="king" && this.state.player[i-1][j+1]=="2") return true;
+                    if(i<7 && j>0 && this.state.piece[i+1][j-1]=="king" && this.state.player[i+1][j-1]=="2") return true;
+                    if(i<7 && j<7 && this.state.piece[i+1][j+1]=="king" && this.state.player[i+1][j+1]=="2") return true;
+                    if(i>0) for(let r=i-1; r>=0; r--) {
+                        if(this.state.piece[r][j]=="king") break;
+                        if(this.state.piece[r][j]=="bishop") break;
+                        if(this.state.piece[r][j]=="pawn") break;
+                        if(this.state.piece[r][j]=="knight") break;
+                        if(this.state.player[r][j]=="1") break;
+                        if(this.state.player[r][j]=="2" && (this.state.piece[r][j]=="queen" || this.state.piece[r][j]=="rook")) return true;
+                    }
+                    if(i<7) for(let r=i+1; r<8; r++) {
+                        if(this.state.piece[r][j]=="king") break;
+                        if(this.state.piece[r][j]=="bishop") break;
+                        if(this.state.piece[r][j]=="pawn") break;
+                        if(this.state.piece[r][j]=="knight") break;
+                        if(this.state.player[r][j]=="1") break;
+                        if(this.state.player[r][j]=="2" && (this.state.piece[r][j]=="queen" || this.state.piece[r][j]=="rook")) return true;
+                    }
+                    if(j>0) for(let c=j-1; c>=0; c--) {
+                        if(this.state.piece[i][c]=="king") break;
+                        if(this.state.piece[i][c]=="bishop") break;
+                        if(this.state.piece[i][c]=="pawn") break;
+                        if(this.state.piece[i][c]=="knight") break;
+                        if(this.state.player[i][c]=="1") break;
+                        if(this.state.player[i][c]=="2" && (this.state.piece[i][c]=="queen" || this.state.piece[i][c]=="rook")) return true;
+                    }
+                    if(j<7) for(let c=j+1; c<8; c++) {
+                        if(this.state.piece[i][c]=="king") break;
+                        if(this.state.piece[i][c]=="bishop") break;
+                        if(this.state.piece[i][c]=="pawn") break;
+                        if(this.state.piece[i][c]=="knight") break;
+                        if(this.state.player[i][c]=="1") break;
+                        if(this.state.player[i][c]=="2" && (this.state.piece[i][c]=="queen" || this.state.piece[i][c]=="rook")) return true;
+                    }
+                    let r, c;
+                    if(i>0 && j>0) for(r = i-1, c = j-1; r>=0 && c>=0; r--, c--) {
+                        if(this.state.piece[r][c]=="king") break;
+                        if(this.state.piece[r][c]=="rook") break;
+                        if(this.state.piece[r][c]=="pawn") break;
+                        if(this.state.piece[r][c]=="knight") break;
+                        if(this.state.player[r][c]=="1") break;
+                        if(this.state.player[r][c]=="2" && (this.state.piece[r][c]=="queen" || this.state.piece[r][c]=="bishop")) return true;
+                    }
+                    if(i>0 && j<7) for(r = i-1, c = j+1; r>=0 && c<8; r--, c++) {
+                        if(this.state.piece[r][c]=="king") break;
+                        if(this.state.piece[r][c]=="rook") break;
+                        if(this.state.piece[r][c]=="pawn") break;
+                        if(this.state.piece[r][c]=="knight") break;
+                        if(this.state.player[r][c]=="1") break;
+                        if(this.state.player[r][c]=="2" && (this.state.piece[r][c]=="queen" || this.state.piece[r][c]=="bishop")) return true;
+                    }
+                    if(i<7 && j>0) for(r = i+1, c = j-1; r<8 && c>=0; r++, c--) {
+                        if(this.state.piece[r][c]=="king") break;
+                        if(this.state.piece[r][c]=="rook") break;
+                        if(this.state.piece[r][c]=="pawn") break;
+                        if(this.state.piece[r][c]=="knight") break;
+                        if(this.state.player[r][c]=="1") break;
+                        if(this.state.player[r][c]=="2" && (this.state.piece[r][c]=="queen" || this.state.piece[r][c]=="bishop")) return true;
+                    }
+                    if(i<7 && j<7) for(r = i+1, c = j+1; r<8 && c<8; r++, c++) {
+                        if(this.state.piece[r][c]=="king") break;
+                        if(this.state.piece[r][c]=="rook") break;
+                        if(this.state.piece[r][c]=="pawn") break;
+                        if(this.state.piece[r][c]=="knight") break;
+                        if(this.state.player[r][c]=="1") break;
+                        if(this.state.player[r][c]=="2" && (this.state.piece[r][c]=="queen" || this.state.piece[r][c]=="bishop")) return true;
+                    }
+                    return false;
+                }
+            }
+        }
+    }
+
+    isBlackInCheck() {
+        for(let i=0; i<8; i++) {
+            for(let j=0; j<8; j++) {
+                if(this.state.piece[i][j]=="king" && this.state.player[i][j]=="2") {
+                    if(i>0 && j>0 && this.state.piece[i-1][j-1]=="pawn" && this.state.player[i-1][j-1]=="1") return true;
+                    if(i>0 && j<7 && this.state.piece[i-1][j+1]=="pawn" && this.state.player[i-1][j+1]=="1") return true;
+                    if(i<6 && j<7 && this.state.piece[i+2][j+1]=="knight" && this.state.player[i+2][j+1]=="1") return true;
+                    if(i<6 && j>0 && this.state.piece[i+2][j-1]=="knight" && this.state.player[i+2][j-1]=="1") return true;
+                    if(i>1 && j<7 && this.state.piece[i-2][j+1]=="knight" && this.state.player[i-2][j+1]=="1") return true;
+                    if(i>1 && j>0 && this.state.piece[i-2][j-1]=="knight" && this.state.player[i-2][j-1]=="1") return true;
+                    if(i<7 && j<6 && this.state.piece[i+1][j+2]=="knight" && this.state.player[i+1][j+2]=="1") return true;
+                    if(i<7 && j>1 && this.state.piece[i+1][j-2]=="knight" && this.state.player[i+1][j-2]=="1") return true;
+                    if(i>0 && j<6 && this.state.piece[i-1][j+2]=="knight" && this.state.player[i-1][j+2]=="1") return true;
+                    if(i>0 && j>1 && this.state.piece[i-1][j-2]=="knight" && this.state.player[i-1][j-2]=="1") return true;
+                    if(i>0 && j>0 && this.state.piece[i-1][j-1]=="king" && this.state.player[i-1][j-1]=="1") return true;
+                    if(i>0 && j<7 && this.state.piece[i-1][j+1]=="king" && this.state.player[i-1][j+1]=="1") return true;
+                    if(i<7 && j>0 && this.state.piece[i+1][j-1]=="king" && this.state.player[i+1][j-1]=="1") return true;
+                    if(i<7 && j<7 && this.state.piece[i+1][j+1]=="king" && this.state.player[i+1][j+1]=="1") return true;
+                    if(i>0) for(let r=i-1; r>=0; r--) {
+                        if(this.state.piece[r][j]=="king") break;
+                        if(this.state.piece[r][j]=="bishop") break;
+                        if(this.state.piece[r][j]=="pawn") break;
+                        if(this.state.piece[r][j]=="knight") break;
+                        if(this.state.player[r][j]=="2") break;
+                        if(this.state.player[r][j]=="1" && (this.state.piece[r][j]=="queen" || this.state.piece[r][j]=="rook")) return true;
+                    }
+                    if(i<7) for(let r=i+1; r<8; r++) {
+                        if(this.state.piece[r][j]=="king") break;
+                        if(this.state.piece[r][j]=="bishop") break;
+                        if(this.state.piece[r][j]=="pawn") break;
+                        if(this.state.piece[r][j]=="knight") break;
+                        if(this.state.player[r][j]=="2") break;
+                        if(this.state.player[r][j]=="1" && (this.state.piece[r][j]=="queen" || this.state.piece[r][j]=="rook")) return true;
+                    }
+                    if(j>0) for(let c=j-1; c>=0; c--) {
+                        if(this.state.piece[i][c]=="king") break;
+                        if(this.state.piece[i][c]=="bishop") break;
+                        if(this.state.piece[i][c]=="pawn") break;
+                        if(this.state.piece[i][c]=="knight") break;
+                        if(this.state.player[i][c]=="2") break;
+                        if(this.state.player[i][c]=="1" && (this.state.piece[i][c]=="queen" || this.state.piece[i][c]=="rook")) return true;
+                    }
+                    if(j<7) for(let c=j+1; c<8; c++) {
+                        if(this.state.piece[i][c]=="king") break;
+                        if(this.state.piece[i][c]=="bishop") break;
+                        if(this.state.piece[i][c]=="pawn") break;
+                        if(this.state.piece[i][c]=="knight") break;
+                        if(this.state.player[i][c]=="2") break;
+                        if(this.state.player[i][c]=="1" && (this.state.piece[i][c]=="queen" || this.state.piece[i][c]=="rook")) return true;
+                    }
+                    let r, c;
+                    if(i>0 && j>0) for(r = i-1, c = j-1; r>=0 && c>=0; r--, c--) {
+                        if(this.state.piece[r][c]=="king") break;
+                        if(this.state.piece[r][c]=="rook") break;
+                        if(this.state.piece[r][c]=="pawn") break;
+                        if(this.state.piece[r][c]=="knight") break;
+                        if(this.state.player[r][c]=="2") break;
+                        if(this.state.player[r][c]=="1" && (this.state.piece[r][c]=="queen" || this.state.piece[r][c]=="bishop")) return true;
+                    }
+                    if(i>0 && j<7) for(r = i-1, c = j+1; r>=0 && c<8; r--, c++) {
+                        if(this.state.piece[r][c]=="king") break;
+                        if(this.state.piece[r][c]=="rook") break;
+                        if(this.state.piece[r][c]=="pawn") break;
+                        if(this.state.piece[r][c]=="knight") break;
+                        if(this.state.player[r][c]=="2") break;
+                        if(this.state.player[r][c]=="1" && (this.state.piece[r][c]=="queen" || this.state.piece[r][c]=="bishop")) return true;
+                    }
+                    if(i<7 && j>0) for(r = i+1, c = j-1; r<8 && c>=0; r++, c--) {
+                        if(this.state.piece[r][c]=="king") break;
+                        if(this.state.piece[r][c]=="rook") break;
+                        if(this.state.piece[r][c]=="pawn") break;
+                        if(this.state.piece[r][c]=="knight") break;
+                        if(this.state.player[r][c]=="2") break;
+                        if(this.state.player[r][c]=="1" && (this.state.piece[r][c]=="queen" || this.state.piece[r][c]=="bishop")) return true;
+                    }
+                    if(i<7 && j<7) for(r = i+1, c = j+1; r<8 && c<8; r++, c++) {
+                        if(this.state.piece[r][c]=="king") break;
+                        if(this.state.piece[r][c]=="rook") break;
+                        if(this.state.piece[r][c]=="pawn") break;
+                        if(this.state.piece[r][c]=="knight") break;
+                        if(this.state.player[r][c]=="2") break;
+                        if(this.state.player[r][c]=="1" && (this.state.piece[r][c]=="queen" || this.state.piece[r][c]=="bishop")) return true;
+                    }
+                    return false;
+                }
+            }
+        }
+    }
+
+    isCheckOrMate() {
+        if(this.state.whichPlayer=="2" && this.state.whiteCheck==1) {
+            if(this.isWhiteInCheck()) {
+                this.showError("Jesteś szachowany, wykonaj poprawny ruch!")
+                this.undoMove();
+                return;
+            } else {
+                this.setState({whiteCheck: 0});
+            }
+        }
+        if(this.state.whichPlayer=="2" && this.isWhiteInCheck()) {
+            this.showError("Nie możesz wykonać tego ruchu - będziesz szachowany!")
+            this.undoMove();
+            return;
+        }
+        else if(this.state.whichPlayer=="1" && this.isWhiteInCheck()) {
+            console.log("Brawo! Szachujesz przeciwnika!");
+            this.setState({whiteCheck: 1});
+        }
+
+
+        if(this.state.whichPlayer=="1" && this.state.blackCheck==1) {
+            if(this.isBlackInCheck()) {
+                this.showError("Jesteś szachowany, wykonaj poprawny ruch!")
+                this.undoMove();
+                return;
+            } else {
+                this.setState({blackCheck: 0});
+            }
+        }
+        if(this.state.whichPlayer=="1" && this.isBlackInCheck()) {
+            this.showError("Nie możesz wykonać tego ruchu - będziesz szachowany!")
+            this.undoMove();
+            return;
+        }
+        else if(this.state.whichPlayer=="2" && this.isBlackInCheck()) {
+            console.log("Brawo! Szachujesz przeciwnika!");
+            this.setState({blackCheck: 1});
+        }
     }
 
     doMove(row, col) {
@@ -127,7 +350,7 @@ export default class Board extends React.Component {
                         whichPlayer: "2",
                         error: "",
                         stepNumber: stepNumber + 1
-                    });
+                    }, () => {this.isCheckOrMate()});
                     return true;
                 }
                 else
@@ -159,7 +382,7 @@ export default class Board extends React.Component {
                         whichPlayer: "1",
                         error: "",
                         stepNumber: stepNumber + 1
-                    });
+                    }, () => {this.isCheckOrMate()});
                     return true;
                 }
                 else
@@ -220,7 +443,7 @@ export default class Board extends React.Component {
                             player: newPlayer,
                             whichPlayer: "2",
                             error: ""
-                        });
+                        }, () => {this.isCheckOrMate()});
                         return true;
                     }
                     else
@@ -282,7 +505,7 @@ export default class Board extends React.Component {
                             player: newPlayer,
                             whichPlayer: "1",
                             error: ""
-                        });
+                        }, () => {this.isCheckOrMate()});
                         return true;
                     }
                     else
@@ -315,7 +538,7 @@ export default class Board extends React.Component {
                         whichPlayer: "2",
                         error: "",
                         stepNumber: stepNumber + 1
-                    });
+                    }, () => {this.isCheckOrMate()});
                     return true;
                 }
                 else
@@ -341,7 +564,7 @@ export default class Board extends React.Component {
                         whichPlayer: "1",
                         error: "",
                         stepNumber: stepNumber + 1
-                    });
+                    }, () => {this.isCheckOrMate()});
                     return true;
                 }
                 else
@@ -432,7 +655,7 @@ export default class Board extends React.Component {
                             player: newPlayer,
                             whichPlayer: "2",
                             error: ""
-                        });
+                        }, () => {this.isCheckOrMate()});
                         return true;
                     }
                     else
@@ -525,7 +748,7 @@ export default class Board extends React.Component {
                             player: newPlayer,
                             whichPlayer: "1",
                             error: ""
-                        });
+                        }, () => {this.isCheckOrMate()});
                         return true;
                     }
                     else
@@ -584,7 +807,7 @@ export default class Board extends React.Component {
                             player: newPlayer,
                             whichPlayer: "2",
                             error: ""
-                        });
+                        }, () => {this.isCheckOrMate()});
                         return true;
                     }
                     else
@@ -641,7 +864,7 @@ export default class Board extends React.Component {
                             player: newPlayer,
                             whichPlayer: "1",
                             error: ""
-                        });
+                        }, () => {this.isCheckOrMate()});
                         return true;
                     }
                     else
@@ -676,7 +899,7 @@ export default class Board extends React.Component {
                         player: newPlayer,
                         whichPlayer: "2",
                         error: ""
-                    });
+                    }, () => {this.isCheckOrMate()});
                     return true;
                 }
                 else
@@ -704,7 +927,7 @@ export default class Board extends React.Component {
                         player: newPlayer,
                         whichPlayer: "1",
                         error: ""
-                    });
+                    }, () => {this.isCheckOrMate()});
                     return true;
                 }
                 else
