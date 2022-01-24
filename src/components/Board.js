@@ -9,11 +9,9 @@ class Square extends React.Component {
         };
         this.clicked = this.clicked.bind(this);
     }
-
     clicked() {
         this.props.clicked(this.props.row, this.props.col);
     }
-
     componentDidMount() {
         if(this.props.player == "1" && this.props.piece == "pawn") this.setState({image: "img/bialy_pionek.png"});
         else if(this.props.player == "2" && this.props.piece == "pawn") this.setState({image: "img/czarny_pionek.png"});
@@ -29,20 +27,17 @@ class Square extends React.Component {
         else if(this.props.player == "2" && this.props.piece == "king") this.setState({image: "img/czarny_krol.png"});
         else this.setState({image: "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="});
     }
-
     render() {
-    return(
-        <div id="field00" onClick={this.clicked} className={'field ' + this.props.color} style={{ 
-            backgroundImage: `url("${this.state.image}")` 
-          }}>
-            </div>
-    )
+        return(
+            <div id="field00" onClick={this.clicked} className={'field ' + this.props.color} style={{ 
+                backgroundImage: `url("${this.state.image}")` 
+            }}>
+                </div>
+        )
+    }
 }
-}
-
 
 export default class Board extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -79,6 +74,7 @@ export default class Board extends React.Component {
         this.undoMove = this.undoMove.bind(this);
         this.isCheckOrMate = this.isCheckOrMate.bind(this);    
         this.isWhiteInCheck = this.isWhiteInCheck.bind(this);
+        this.knockoutKing = this.knockoutKing.bind(this);
     }
     undoMove()
     {
@@ -104,7 +100,6 @@ export default class Board extends React.Component {
             stepNumber: move
         })
     }
-
     isWhiteInCheck() {
         for(let i=0; i<8; i++) {
             for(let j=0; j<8; j++) {
@@ -193,7 +188,6 @@ export default class Board extends React.Component {
             }
         }
     }
-
     isBlackInCheck() {
         for(let i=0; i<8; i++) {
             for(let j=0; j<8; j++) {
@@ -282,7 +276,6 @@ export default class Board extends React.Component {
             }
         }
     }
-
     isCheckOrMate() {
         if(this.state.whichPlayer=="2" && this.state.whiteCheck==1) {
             if(this.isWhiteInCheck()) {
@@ -302,8 +295,6 @@ export default class Board extends React.Component {
             console.log("Brawo! Szachujesz przeciwnika!");
             this.setState({whiteCheck: 1});
         }
-
-
         if(this.state.whichPlayer=="1" && this.state.blackCheck==1) {
             if(this.isBlackInCheck()) {
                 this.showError("Jesteś szachowany, wykonaj poprawny ruch!")
@@ -323,10 +314,7 @@ export default class Board extends React.Component {
             this.setState({blackCheck: 1});
         }
     }
-
     doMove(row, col) {
-        
-        console.log("ROW1: " + row + " COL1: " + col)
         if (this.state.firstClickPiece == "pawn") {
             if(this.state.firstClickPlayer == "1") {
                 if(((row == this.state.firstClickRow - 1 || (this.state.firstClickRow == 6 && row == this.state.firstClickRow - 2)) 
@@ -819,7 +807,6 @@ export default class Board extends React.Component {
                 {
                     this.showError("Wybierz poprawny ruch");
                 }
-
             }
             else
             {
@@ -906,7 +893,6 @@ export default class Board extends React.Component {
                 {                    
                     this.showError("Wybierz poprawny ruch");
                 }
-
             }
             else
             {
@@ -937,7 +923,6 @@ export default class Board extends React.Component {
             }
         }
     }
-
     showError(err) {
         this.setState({ error: err });
         setTimeout(() => {
@@ -945,9 +930,23 @@ export default class Board extends React.Component {
         }, 1000);
     }
 
+    knockoutKing()
+    {
+        var i = 0;
+        var tabPiece = this.state.piece;
+        console.log(tabPiece)
+        tabPiece.forEach(element => {
+            element.forEach(ele => {
+                if(ele == "king")
+                {
+                    i++;
+                }
+            });
+        });
+        console.log(i)
+    }
+
     squareClicked(row, col) {
-        //console.log("ROW: " + row + " COL: " + col)
-        //console.log("AAA: " + this.state.player[row][col] + " " + this.state.whichPlayer)
         if(this.state.firstClickCol === "") {
             if(this.state.player[row][col] == this.state.whichPlayer) {
                 this.setState({firstClickCol: col, firstClickRow: row, firstClickPiece: this.state.piece[row][col], firstClickPlayer: this.state.player[row][col]});
@@ -980,8 +979,8 @@ export default class Board extends React.Component {
                 //Ruch wykonany
             }
         }
+        this.knockoutKing()
     }
-
     render()
     {
         const board = [];
@@ -1020,5 +1019,4 @@ export default class Board extends React.Component {
             </div>
         )
     }
-    
 }
