@@ -1,5 +1,5 @@
 # KrólewskaGra 
-![Początkowa plansza](https://raw.githubusercontent.com/kry008/krolewskaGra/main/readmeImg/1.png) 
+![Początkowa plansza](https://raw.githubusercontent.com/kry008/krolewskaGra/main/readmeImg/1.png)  
 Projekt został zrobiony na zajęcia Programowanie warstwy frontendowej aplikacji internetowych. W ramach projektu mieliśmy zrobić: 
 
  - Zabezpieczenie przed przeskakiwaniem figur: 
