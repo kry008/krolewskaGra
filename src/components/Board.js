@@ -157,8 +157,8 @@ export default class Board extends React.Component {
         for(let i=0; i<8; i++) {
             for(let j=0; j<8; j++) {
                 if(this.state.piece[i][j]=="king" && this.state.player[i][j]=="2") {
-                    if(i>0 && j>0 && this.state.piece[i-1][j-1]=="pawn" && this.state.player[i-1][j-1]=="1") return true;
-                    if(i>0 && j<7 && this.state.piece[i-1][j+1]=="pawn" && this.state.player[i-1][j+1]=="1") return true;
+                    if(i>0 && j>0 && this.state.piece[i+1][j-1]=="pawn" && this.state.player[i+1][j-1]=="1") return true;
+                    if(i>0 && j<7 && this.state.piece[i+1][j+1]=="pawn" && this.state.player[i+1][j+1]=="1") return true;
                     if(i<6 && j<7 && this.state.piece[i+2][j+1]=="knight" && this.state.player[i+2][j+1]=="1") return true;
                     if(i<6 && j>0 && this.state.piece[i+2][j-1]=="knight" && this.state.player[i+2][j-1]=="1") return true;
                     if(i>1 && j<7 && this.state.piece[i-2][j+1]=="knight" && this.state.player[i-2][j+1]=="1") return true;
