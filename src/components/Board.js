@@ -36,7 +36,6 @@ class Square extends React.Component {
         )
     }
 }
-
 export default class Board extends React.Component {
     constructor(props) {
         super(props);
@@ -351,7 +350,6 @@ export default class Board extends React.Component {
                     && row == this.state.firstClickRow + 2)) 
                     && this.state.piece[row][col] == "" 
                     && col == this.state.firstClickCol) || (row == this.state.firstClickRow + 1 && (col == (this.state.firstClickCol + 1) ||  col == (this.state.firstClickCol - 1)) && this.state.piece[row][col]!="" && this.state.player[row][col]=="1")) {
-
                     let newPiece = this.state.piece.map(function(arr) { return arr.slice();});
                     let newPlayer = this.state.player.map(function(arr) { return arr.slice();});
                     newPiece[this.state.firstClickRow][this.state.firstClickCol] = "";
@@ -377,7 +375,6 @@ export default class Board extends React.Component {
                 {
                     this.showError("Wybierz poprawny ruch");
                 }
-            
             }
         }
         else if(this.state.firstClickPiece == "rook")
@@ -443,7 +440,6 @@ export default class Board extends React.Component {
                 {
                     this.showError("Wybierz poprawny ruch");
                 }
-
             }
             else
             {
@@ -533,7 +529,6 @@ export default class Board extends React.Component {
                 {
                     this.showError("Wybierz poprawny ruch");
                 }
-
             }
             else
             {
@@ -655,7 +650,6 @@ export default class Board extends React.Component {
                 {
                     this.showError("Wybierz poprawny ruch");
                 }
-
             }
             else
             {
@@ -928,8 +922,13 @@ export default class Board extends React.Component {
         setTimeout(() => {
             this.setState({ error: "" });
         }, 1000);
+        this.setState({
+            firstClickCol: "",
+            firstClickRow: "",
+            firstClickPiece: "",
+            firstClickPlayer: ""
+        })
     }
-
     knockoutKing()
     {
         var i = 0;
@@ -945,7 +944,6 @@ export default class Board extends React.Component {
         });
         console.log(i)
     }
-
     squareClicked(row, col) {
         if(this.state.firstClickCol === "") {
             if(this.state.player[row][col] == this.state.whichPlayer) {
