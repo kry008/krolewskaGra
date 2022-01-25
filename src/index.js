@@ -10,7 +10,7 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <React.StrictMode>
   <div id="page">
-    Szachy React
+    Królewska Gra
     <Game />
   </div>
 </React.StrictMode>,
