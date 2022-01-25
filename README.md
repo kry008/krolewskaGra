@@ -10,6 +10,12 @@ Projekt został zrobiony na zajęcia Programowanie warstwy frontendowej aplikacj
  
 ![Przeskakiwanie figur - zabezpieczenie](https://raw.githubusercontent.com/kry008/krolewskaGra/main/readmeImg/5.png) 
  - Ruchy figur i pionków zgodne z zasadami
+  
+ 
+### Rzeczy dodane:
+ - Gdy jest błąd sygnalizuje go dźwiękiem  
+
+###############################################################
 ## Autorzy:
 @kry008 oraz @Dawidluna
 

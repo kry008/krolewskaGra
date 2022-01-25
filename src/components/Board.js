@@ -1,6 +1,7 @@
 import React from 'react';
 import '../index.css';
 import Square from './Square'
+import { beep } from './errorSound';
 
 export default class Board extends React.Component {
     constructor(props) {
@@ -894,6 +895,7 @@ export default class Board extends React.Component {
             firstClickPiece: "",
             firstClickPlayer: ""
         })
+        beep();
     }
     knockoutKing()
     {
